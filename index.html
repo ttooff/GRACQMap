@@ -21,12 +21,6 @@ var zoomLevel = 3; // the map scale. See: http://wiki.openstreetmap.org/wiki/Zoo
 
 var map = L.map('map').setView(coords, zoomLevel);
 
-// we need to provide the map with some base map tiles. There are few free options.
-// we'll use Stamen Acetate, a muted base map good for overlaying data.
-var tiles = 'http://acetate.geoiq.com/tiles/acetate-hillshading/';
-// if you'd like to explore other base maps, see: http://developer.mapquest.com/web/products/open/map
-
-// if you use different tiles, be sure to update the attribution :)
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
