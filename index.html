@@ -111,11 +111,11 @@
 	
 	setInterval(showPlaytime, 100);
 	
-	var t = player.getCurrentTime();
+	var t;
 	
 	function showPlaytime() {
-	//	player.getCurrentTime();
-		//document.getElementById("timer").innerHTML = t.toString();
+		t = !player.getCurrentTime ? 0.0 : player.getCurrentTime();
+		document.getElementById("timer").innerHTML = t.toString();
 	}
 </script>
 </body>
