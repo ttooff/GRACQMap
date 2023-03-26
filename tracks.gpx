@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" creator="Best-Mountain-Artists" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+
+  <metadata>
+    <link href="http://best-mountain-artists.de">
+      <text>Best-Mountain-Artists</text>
+    </link>
+    <time>2017-11-24T09:00:27Z</time>
+    <bounds maxlat="50.935044921934605" maxlon="8.247442189604044" minlat="50.89056090451777" minlon="8.172424659132958"/>
+  </metadata>   <trk>
+        <name>Wildkatzen-Walderlebnis Winterstein </name>
+        <trkseg>
+            <trkpt lat="50.341790" lon="8.673659">
+                <ele>337.19223</ele>
+            </trkpt>
+            <trkpt lat="50.340613" lon="8.674818">
+                <ele>346.23657</ele>
+            </trkpt>
+            <trkpt lat="50.340092" lon="8.674088">
+                <ele>357.13358</ele>
+            </trkpt>
+            <trkpt lat="50.340448" lon="8.667651">
+                <ele>361.92911</ele>
+            </trkpt>
+            <trkpt lat="50.341755" lon="8.673716">
+                <ele>337.40000</ele>
+            </trkpt>
+        </trkseg>
+    </trk>
+</gpx>

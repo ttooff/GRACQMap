@@ -13,6 +13,10 @@
 		integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
 		crossorigin="">
 	</script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js">
+	</script>
+
 </head>
 <body>
  <style>
@@ -20,16 +24,39 @@
       padding: 0;
       margin: 0;
     }
-    html, body, #map {
+    html, body {
       height: 100%;
       width: 100%;
     }
+	.row {
+ 	  display: flex;
+	  height: 100%;
+	}
+	.column {
+  	  flex: 50%;
+	}
+	#map {
+      height: 100%;
+      width: 100%;
+    }
+	#vid {
+      height: 100%;
+      width: 50%;
+    }
   </style>
-<div id="map"></div>
+  
+<div class="row">
+	<div class="column">
+		<div id="map"></div>
+	</div>
+	<div class="column">
+		toto
+	</div>
+</div>
 
 <script>
 
-	var coords = [51.505, -0.09]; // the geographic center of our map
+	var coords = [50.69534117137035, 5.338850682671155]; // the geographic center of our map
 	var zoomLevel = 10; // the map scale. See: http://wiki.openstreetmap.org/wiki/Zoom_levels
 
 	var map = L.map('map').setView(coords, zoomLevel);
@@ -37,6 +64,11 @@
 	L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     	maxZoom: 19,
     	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	}).addTo(map);
+
+	var gpx = 'tracks.gpx';
+	new L.GPX(gpx, {async: true}).on('loaded', function(e) {
+  		map.fitBounds(e.target.getBounds());
 	}).addTo(map);
 
 </script>
