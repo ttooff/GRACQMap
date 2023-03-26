@@ -109,9 +109,9 @@
 	player.stopVideo();
       }
 	
-	function showPlaytime(player) {
-		var t = player.getCurrentTime();
-		document.getElementById("timer").innerHTML = t.toString();
+	function showPlaytime() {
+		player.getCurrentTime();
+		//document.getElementById("timer").innerHTML = t.toString();
 	}
 	
 	setInterval(showPlaytime, 100);
