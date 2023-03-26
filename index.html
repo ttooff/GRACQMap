@@ -54,6 +54,7 @@
 	<div class="column">
 		<div id="player"></div>
 		<div id="timer"></div>
+		<div id="data"></div>
 	</div>
 </div>
 
@@ -118,6 +119,9 @@
 		t = !player.getCurrentTime ? 0.0 : player.getCurrentTime();
 		document.getElementById("timer").innerHTML = t.toString();
 	}
+	
+	document.getElementById("data").innerHTML = e.target.get_speed_data().toString();
+	
 </script>
 </body>
 </html>
