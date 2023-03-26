@@ -40,7 +40,7 @@
       height: 100%;
       width: 100%;
     }
-	#vid {
+	#player {
       height: 100%;
       width: 100%;
     }
@@ -83,8 +83,8 @@
 	var player;
 	function onYouTubeIframeAPIReady() {
 		player = new YT.Player('player', {
-			height: '360',
-			width: '640',
+			height: '100%',
+			width: '100%',
 			videoId: 'WMQzJ3aAE_M',
 			events: {
 				'onReady': onPlayerReady,
