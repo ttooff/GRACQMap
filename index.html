@@ -85,7 +85,7 @@
 	function onYouTubeIframeAPIReady() {
 		player = new YT.Player('player', {
 			height: '100%',
-			width: '100%',
+			width: '50%',
 			videoId: 'WMQzJ3aAE_M',
 			events: {
 				'onReady': onPlayerReady,
@@ -109,9 +109,12 @@
 	player.stopVideo();
       }
 	
-	document.getElementById("timer").innerHTML = 5 + 6;
-	//var t = player.getCurrentTime():Number;
+	function showPlaytime() {
+		var t = player.getCurrentTime():Number;
+		document.getElementById("timer").innerHTML = t.toString();
+	}
 	
+	setInterval(showPlaytime, 100);
 	
 </script>
 </body>
