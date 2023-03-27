@@ -71,9 +71,9 @@
 
 	var gpsData;
 	var gpx = 'GH030798_1_GPS5.gpx';
-	new L.GPX(gpx, {async: true}).on('loaded', function(e) {
+	new L.GPX(gpx, {async: true}).on('loaded', gpsData = function(e) {
   		map.fitBounds(e.target.getBounds());
-		gpsData = e.target.get_speed_data();
+		return e.target.get_speed_data();
 	}).addTo(map);
 
 	var tag = document.createElement('script');
