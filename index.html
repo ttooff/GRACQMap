@@ -70,10 +70,11 @@
     	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 	}).addTo(map);
 
+	var gpsData;
 	var gpx = 'GH030798_1_GPS5.gpx';
 	new L.GPX(gpx, {async: true}).on('loaded', function(e) {
   		map.fitBounds(e.target.getBounds());
-		document.getElementById("data").innerHTML = e.target.get_speed_data().toString();
+		gpsData = e.target.get_speed_data();
 	}).addTo(map);
 
 	var tag = document.createElement('script');
@@ -110,7 +111,7 @@
 	player.stopVideo();
       }
 	
-	setInterval(showPlaytime, 100);
+	setInterval(showPlaytime, 55);
 	
 	var t;
 	
@@ -119,7 +120,7 @@
 		document.getElementById("timer").innerHTML = t.toString();
 	}
 	
-	
+	document.getElementById("data").innerHTML = gpsData.toString();
 	
 </script>
 </body>
