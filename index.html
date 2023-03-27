@@ -73,6 +73,7 @@
 	var gpx = 'GH030798_1_GPS5.gpx';
 	new L.GPX(gpx, {async: true}).on('loaded', function(e) {
   		map.fitBounds(e.target.getBounds());
+		document.getElementById("data").innerHTML = e.target.get_speed_data().toString();
 	}).addTo(map);
 
 	var tag = document.createElement('script');
@@ -118,7 +119,7 @@
 		document.getElementById("timer").innerHTML = t.toString();
 	}
 	
-	document.getElementById("data").innerHTML = "toto";
+	
 	
 </script>
 </body>
