@@ -69,9 +69,9 @@
     	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 	}).addTo(map);
 
-	var gpsData;
+	var gpxData = new L.GPX(gpx);
 	var gpx = 'GH030798_1_GPS5.gpx';
-	new test = L.GPX(gpx, {async: true}).on('loaded', function(e) {
+	new L.GPX(gpx, {async: true}).on('loaded', function(e) {
   		map.fitBounds(e.target.getBounds());
 	}).addTo(map);
 
@@ -118,7 +118,7 @@
 		document.getElementById("timer").innerHTML = t.toString();
 	}
 	
-	document.getElementById("data").innerHTML = gpsData.toString();
+	document.getElementById("data").innerHTML = gpxData.target.get_start_time().toString();
 	
 </script>
 </body>
