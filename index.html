@@ -70,8 +70,11 @@
 	}).addTo(map);
 
 	var gpx = 'GH030798_1_GPS5.gpx';
+	var gpxData:
+	
 	new L.GPX(gpx, {async: true}).on('loaded', function(e) {
   		map.fitBounds(e.target.getBounds());
+		gpxData = e.target;
 	}).addTo(map);
 
 	var tag = document.createElement('script');
