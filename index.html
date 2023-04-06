@@ -111,19 +111,17 @@
       }
 	
 	setInterval(showPlaytime, 55);
-	
 
-	 
 	// Read the contents of the GPX file
-	fetch('GH030798_1_GPS5.gpx')
-	  .then(response => response.text())
-	  .then(xmlString => {
-	    // Parse the XML content of the GPX file
-	    const parser = new DOMParser();
-	    const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+	let response = await fetch('GH030798_1_GPS5.gpx');
+	let xmlString = await response.text();
+	
+	 // Parse the XML content of the GPX file
+	 const parser = new DOMParser();
+	 const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
 
-	    // Extract the time, latitude, and longitude data from the GPX file
-	    const trkpts = xmlDoc.getElementsByTagName('trkpt');
+	 // Extract the time, latitude, and longitude data from the GPX file
+	 const trkpts = xmlDoc.getElementsByTagName('trkpt');
 
 		
 	for (let i = 0; i < trkpts.length; i++) {
