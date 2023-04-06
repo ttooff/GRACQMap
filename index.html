@@ -119,8 +119,6 @@
 		document.getElementById("timer").innerHTML = t.toString();
 	}
 	
-	//document.getElementById("data").innerHTML = gpxData.target.get_start_time().toString();
-	
 	// Read the contents of the GPX file
 	fetch('GH030798_1_GPS5.gpx')
 	  .then(response => response.text())
@@ -136,9 +134,10 @@
 	      const time = trkpt.getElementsByTagName('time')[0].textContent;
 	      const lat = trkpt.getAttribute('lat');
 	      const lon = trkpt.getAttribute('lon');
-
+	      const timeMs = new Date(time).getTime();
+		    
 	      // Do something with the time, latitude, and longitude data
-	      console.log(`Time: ${time}, Latitude: ${lat}, Longitude: ${lon}`);
+	      console.log(`Time in ms: ${timeMs}, Latitude: ${lat}, Longitude: ${lon}`);
 	    }
 	  });
 
