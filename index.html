@@ -129,12 +129,13 @@
 
 	    // Extract the time, latitude, and longitude data from the GPX file
 	    const trkpts = xmlDoc.getElementsByTagName('trkpt');
+	    const times = trkpts.getElementsByTagName('time')[0].textContent;
 	    for (let i = 0; i < trkpts.length; i++) {
 	      const trkpt = trkpts[i];
 	      const time = trkpt.getElementsByTagName('time')[0].textContent;
 	      const lat = trkpt.getAttribute('lat');
 	      const lon = trkpt.getAttribute('lon');
-	      const timeMs = new Date(time).getTime();
+	      const timeMs = new Date(times[i]).getTime();
 		    
 	      // Do something with the time, latitude, and longitude data
 	      console.log(`Time in ms: ${timeMs}, Latitude: ${lat}, Longitude: ${lon}`);
