@@ -112,7 +112,7 @@
 	
 	setInterval(showPlaytime, 55);
 	
-	var trkpts;
+
 	 
 	// Read the contents of the GPX file
 	fetch('GH030798_1_GPS5.gpx')
@@ -123,7 +123,7 @@
 	    const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
 
 	    // Extract the time, latitude, and longitude data from the GPX file
-	    trkpts = xmlDoc.getElementsByTagName('trkpt');
+	    const trkpts = xmlDoc.getElementsByTagName('trkpt');
 
 		
 	for (let i = 0; i < trkpts.length; i++) {
