@@ -122,9 +122,7 @@
 		 const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
 			
 		// Extract the time, latitude, and longitude data from the GPX file
-	 	const trkpts = xmlDoc.getElementsByTagName('trkpt');
-		
-		return trkpts;
+	 	return xmlDoc.getElementsByTagName('trkpt');
 	}
 			
 	var trkpts = readXML();
