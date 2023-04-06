@@ -112,13 +112,6 @@
 	
 	setInterval(showPlaytime, 55);
 	
-	var t;
-	
-	function showPlaytime() {
-		t = !player.getCurrentTime ? 0.0 : player.getCurrentTime();
-		document.getElementById("timer").innerHTML = t.toString();
-	}
-	
 	// Read the contents of the GPX file
 	fetch('GH030798_1_GPS5.gpx')
 	  .then(response => response.text())
@@ -129,18 +122,35 @@
 
 	    // Extract the time, latitude, and longitude data from the GPX file
 	    const trkpts = xmlDoc.getElementsByTagName('trkpt');
-	    const times = trkpts.getElementsByTagName('time')[0].textContent;
-	    for (let i = 0; i < trkpts.length; i++) {
+	});
+	const trkpt = trkpts[0];
+	const startTime = trkpt.getElementsByTagName('time')[0].textContent;
+	const startTimeSec = new Date(time).getTime()/1000;
+	
+	var t;
+	var cnt = 0;
+	
+	function showPlaytime() {
+		t = !player.getCurrentTime ? 0.0 : player.getCurrentTime();
+		document.getElementById("timer").innerHTML = t.toString();
+		
+		const trkpt = trkpts[cnt];
+		const time = trkpt.getElementsByTagName('time')[0].textContent;
+		
+	}
+	
+	
+		
+	for (let i = 0; i < trkpts.length; i++) {
 	      const trkpt = trkpts[i];
 	      const time = trkpt.getElementsByTagName('time')[0].textContent;
 	      const lat = trkpt.getAttribute('lat');
 	      const lon = trkpt.getAttribute('lon');
-	      const timeMs = new Date(times[i]).getTime();
+	      const timeSec = new Date(time).getTime()/1000 - startTimeSec;
 		    
 	      // Do something with the time, latitude, and longitude data
-	      console.log(`Time loop in ms: ${timeMs}, Latitude: ${lat}, Longitude: ${lon}`);
-	    }
-	  });
+	      console.log(`Time in sec: ${timeSec}, Latitude: ${lat}, Longitude: ${lon}`);
+	 }
 
 </script>
 </body>
