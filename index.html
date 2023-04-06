@@ -113,8 +113,8 @@
 	setInterval(showPlaytime, 55);
 
 	// Read the contents of the GPX file
-	let response = await fetch('GH030798_1_GPS5.gpx');
-	let xmlString = await response.text();
+	let response = fetch('GH030798_1_GPS5.gpx');
+	let xmlString = response.text();
 	
 	 // Parse the XML content of the GPX file
 	 const parser = new DOMParser();
