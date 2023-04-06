@@ -140,9 +140,9 @@
 	      console.log(`Time in sec: ${timeSec}, Latitude: ${lat}, Longitude: ${lon}`);
 	 }
 	
-	const trkpt = trkpts[0];
-	const startTime = trkpt.getElementsByTagName('time')[0].textContent;
-	const startTimeSec = new Date(time).getTime()/1000;
+	//const trkpt = trkpts[0];
+	//const startTime = trkpt.getElementsByTagName('time')[0].textContent;
+	//const startTimeSec = new Date(time).getTime()/1000;
 	
 	var t;
 	var cnt = 0;
@@ -151,8 +151,8 @@
 		t = !player.getCurrentTime ? 0.0 : player.getCurrentTime();
 		document.getElementById("timer").innerHTML = t.toString();
 		
-		const trkpt = trkpts[cnt];
-		const time = trkpt.getElementsByTagName('time')[0].textContent;
+		//const trkpt = trkpts[cnt];
+		//const time = trkpt.getElementsByTagName('time')[0].textContent;
 		
 	}
 	
