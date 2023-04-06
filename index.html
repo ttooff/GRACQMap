@@ -121,6 +121,27 @@
 	
 	//document.getElementById("data").innerHTML = gpxData.target.get_start_time().toString();
 	
+	// Read the contents of the GPX file
+	fetch('GH030798_1_GPS5.gpx')
+	  .then(response => response.text())
+	  .then(xmlString => {
+	    // Parse the XML content of the GPX file
+	    const parser = new DOMParser();
+	    const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+
+	    // Extract the time, latitude, and longitude data from the GPX file
+	    const trkpts = xmlDoc.getElementsByTagName('trkpt');
+	    for (let i = 0; i < trkpts.length; i++) {
+	      const trkpt = trkpts[i];
+	      const time = trkpt.getElementsByTagName('time')[0].textContent;
+	      const lat = trkpt.getAttribute('lat');
+	      const lon = trkpt.getAttribute('lon');
+
+	      // Do something with the time, latitude, and longitude data
+	      console.log(`Time: ${time}, Latitude: ${lat}, Longitude: ${lon}`);
+	    }
+	  });
+
 </script>
 </body>
 </html>
