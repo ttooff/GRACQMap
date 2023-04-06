@@ -74,15 +74,8 @@
 	
 	new L.GPX(gpx, {async: true}).on('loaded', function(e) {
   		map.fitBounds(e.target.getBounds());
-		gpxData = e.target;
 	}).addTo(map);
 
-	              
-            var fr=new FileReader();
-                        
-            fr.readAsText(gpx);
-    
-	
 	var tag = document.createElement('script');
 
 	tag.src = "https://www.youtube.com/iframe_api";
