@@ -125,9 +125,9 @@
 	 	return xmlDoc.getElementsByTagName('trkpt');
 	}
 			
-	var trkpts = readXML();
-	
-	for (let i = 0; i < trkpts.length; i++) {
+	readXML()
+  	  .then(trkpts => {
+	    for (let i = 0; i < trkpts.length; i++) {
 	      const trkpt = trkpts[i];
 	      const time = trkpt.getElementsByTagName('time')[0].textContent;
 	      const lat = trkpt.getAttribute('lat');
@@ -136,7 +136,8 @@
 		    
 	      // Do something with the time, latitude, and longitude data
 	      console.log(`Time in sec: ${timeSec}, Latitude: ${lat}, Longitude: ${lon}`);
-	 }
+	   } 
+ 	 });
 	
 	//const trkpt = trkpts[0];
 	//const startTime = trkpt.getElementsByTagName('time')[0].textContent;
