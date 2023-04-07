@@ -127,6 +127,10 @@
 			
 	readXML()
   	  .then(trkpts => {
+	    const trkpt = trkpts[0];
+            const time = trkpt.getElementsByTagName('time')[0].textContent;
+	    const startTimeSec = new Date(time).getTime()/1000;
+		
 	    for (let i = 0; i < trkpts.length; i++) {
 	      const trkpt = trkpts[i];
 	      const time = trkpt.getElementsByTagName('time')[0].textContent;
