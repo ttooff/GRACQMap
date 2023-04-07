@@ -139,6 +139,8 @@
 	      const timeSec = new Date(time).getTime()/1000 - startTimeSec;
 		    
 	      // Do something with the time, latitude, and longitude data
+	      var marker = new L.Marker([lat, lon]);
+              marker.addTo(map);
 	      console.log(`Time in sec: ${timeSec}, Latitude: ${lat}, Longitude: ${lon}`);
 	   } 
  	 });
