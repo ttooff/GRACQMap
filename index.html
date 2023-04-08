@@ -146,7 +146,7 @@
 		t = !player.getCurrentTime ? 0.0 : player.getCurrentTime();
 		document.getElementById("timer").innerHTML = t.toString();
 		
-		console.log(`Video time: ${t}, GPX time: ${timeSec}`);
+		console.log(`Video time: ${t}, GPX time: ${timeSec}, cnt: ${cnt}`);
 		
 		while (timeSec < t) {
 		      cnt = cnt + 1;
