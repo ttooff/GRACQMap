@@ -77,7 +77,9 @@
 	new L.GPX(gpx, {async: true}).on('loaded', function(e) {
   		map.fitBounds(e.target.getBounds());
 	}).addTo(map).on('click', function(e) {
-		clickIndex = findPointIdxOnPolyline(trkpts, e.latlng)
+		clickIndex = findPointIdxOnPolyline(trkpts, e.latlng);
+		cnt = 0;
+		timeSec = 0;
 	});
 
 	var tag = document.createElement('script');
@@ -108,7 +110,7 @@
 	  for(var i = 0; i < track.length; i++) {
 		var latTmp = trkpts[i].getAttribute('lat');
      		var lonTmp = trkpts[i].getAttribute('lon');
-	        var diffLat =  Math.abs(latTmp - latlng.lat);
+	        var diffLat = Math.abs(latTmp - latlng.lat);
 	        var diffLng = Math.abs(lonTmp - latlng.lng);
 	        if(diffLat + diffLng < prevDiffLat + prevDiffLng) {
 	           prevDiffLat = diffLat;
