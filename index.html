@@ -126,8 +126,7 @@
 	}
 	
 	trkpts = readXML();
-	
-	
+		
      const trkpt = trkpts[0];
      const time = trkpt.getElementsByTagName('time')[0].textContent;
      const lat = trkpt.getAttribute('lat');
@@ -164,6 +163,18 @@
 		t = !player.getCurrentTime ? 0.0 : player.getCurrentTime();
 		document.getElementById("timer").innerHTML = t.toString();
 		
+		
+	      const trkpt = trkpts[cnt];
+	      const time = trkpt.getElementsByTagName('time')[0].textContent;
+	      const lat = trkpt.getAttribute('lat');
+	      const lon = trkpt.getAttribute('lon');
+	      const timeSec = new Date(time).getTime()/1000 - startTimeSec;
+
+	      // Do something with the time, latitude, and longitude data
+	      map.removeLayer(marker);
+	      marker = new L.Marker([lat, lon]);
+	      map.addLayer(marker);
+             cnt = cnt + 1;
 		//const trkpt = trkpts[cnt];
 		//const time = trkpt.getElementsByTagName('time')[0].textContent;
 		
