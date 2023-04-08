@@ -79,6 +79,9 @@
 	}).addTo(map).on('click', function(e) {
 		cnt = findPointIdxOnPolyline(trkpts, e.latlng);
 		timeSec = 0;
+		var timeNew = trkpts[cnt].getElementsByTagName('time')[0].textContent;
+		timeNewSec = new Date(timeNew).getTime()/1000 - startTimeSec;
+		player.seekTo(timeNewSec,true);
 	});
 
 	var tag = document.createElement('script');
