@@ -136,22 +136,6 @@
      var marker = new L.Marker([lat, lon]);
      map.addLayer(marker);
 
-    for (let i = 0; i < trkpts.length; i++) {
-      const trkpt = trkpts[i];
-      const time = trkpt.getElementsByTagName('time')[0].textContent;
-      const lat = trkpt.getAttribute('lat');
-      const lon = trkpt.getAttribute('lon');
-      const timeSec = new Date(time).getTime()/1000 - startTimeSec;
-
-      // Do something with the time, latitude, and longitude data
-      map.removeLayer(marker);
-      marker = new L.Marker([lat, lon]);
-      map.addLayer(marker);
-
-      //console.log(`Time in sec: ${timeSec}, Latitude: ${lat}, Longitude: ${lon}`);
-   } 
-
-	
 	//const trkpt = trkpts[0];
 	//const startTime = trkpt.getElementsByTagName('time')[0].textContent;
 	//const startTimeSec = new Date(time).getTime()/1000;
@@ -177,7 +161,7 @@
               cnt = cnt + 1;
 		//const trkpt = trkpts[cnt];
 		//const time = trkpt.getElementsByTagName('time')[0].textContent;
-	     console.log(`Time in sec: ${timeSec}, Latitude: ${lat}, Longitude: ${lon}`);
+	     //console.log(`Time in sec: ${timeSec}, Latitude: ${lat}, Longitude: ${lon}`);
 	}
 	
 	
