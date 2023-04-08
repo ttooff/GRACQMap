@@ -106,10 +106,10 @@
 	  let prevDiffLat = prevDiffLng = 99999;
 	  let closestIdx = 0;
 	  for(var i = 0; i < track.length; i++) {
-		var latClick = trkpt.getAttribute('lat');
-     		var lonClick = trkpt.getAttribute('lon');
-	        var diffLat =  Math.abs(latClick - latlng.lat);
-	        var diffLng = Math.abs(lonClick - latlng.lng);
+		var latTmp = trkpts[i].getAttribute('lat');
+     		var lonTmp = trkpts[i].getAttribute('lon');
+	        var diffLat =  Math.abs(latTmp - latlng.lat);
+	        var diffLng = Math.abs(lonTmp - latlng.lng);
 	        if(diffLat + diffLng < prevDiffLat + prevDiffLng) {
 	           prevDiffLat = diffLat;
 	           prevDiffLng = diffLng;
