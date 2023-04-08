@@ -135,7 +135,7 @@
 	     const lon = trkpt.getAttribute('lon');
        	     const startTimeSec = new Date(time).getTime()/1000;
 		
-	     marker = L.Marker([lat, lon]);
+	     marker = new L.Marker([lat, lon]);
              map.addLayer(marker);
 	 });
 	
