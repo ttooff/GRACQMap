@@ -145,14 +145,14 @@
 	function showPlaytime() {
 		t = !player.getCurrentTime ? 0.0 : player.getCurrentTime();
 		document.getElementById("timer").innerHTML = t.toString();
-		
-		
-		
+	      
+		console.log(`Video time: ${t}, GPX time: ${timeSec}, cnt: ${cnt}`);
+	
 		while (timeSec < t) {
 		      cnt = cnt + 1;
-			if (cnt > trkpts.length) {
+		      if (cnt > trkpts.length) {
 				cnt = 0;
-			}
+		      }
 			
 		      trkpt = trkpts[cnt];
 		      time = trkpt.getElementsByTagName('time')[0].textContent;
@@ -160,7 +160,7 @@
 		      lon = trkpt.getAttribute('lon');
 		      timeSec = new Date(time).getTime()/1000 - startTimeSec;
 			
-			console.log(`Video time: ${t}, GPX time: ${timeSec}, cnt: ${cnt}`);
+		  
 		}
 		
 	      // Do something with the time, latitude, and longitude data
