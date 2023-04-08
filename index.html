@@ -133,6 +133,12 @@
      const lon = trkpt.getAttribute('lon');
      const startTimeSec = new Date(time).getTime()/1000;
 
+//	 for (var i = 0; i < trkpts.length; i++) {
+//	     const trkpt = trkpts[i];
+//	     const time = trkpt.getElementsByTagName('time')[0].textContent;
+//	     var timeSec[i] = new Date(time).getTime()/1000 - startTimeSec;
+//	 }
+	
      var marker = new L.Marker([lat, lon]);
      map.addLayer(marker);
 
@@ -147,13 +153,19 @@
 		t = !player.getCurrentTime ? 0.0 : player.getCurrentTime();
 		document.getElementById("timer").innerHTML = t.toString();
 		
+		while (timeSec < t) {
+		      cnt = cnt + 1;
+			if (cnt > trkpts.length) {
+				cnt = 0;
+			}
+			
+		      const trkpt = trkpts[cnt];
+		      const time = trkpt.getElementsByTagName('time')[0].textContent;
+		      const lat = trkpt.getAttribute('lat');
+		      const lon = trkpt.getAttribute('lon');
+		      const timeSec = new Date(time).getTime()/1000 - startTimeSec;
+		}
 		
-	      const trkpt = trkpts[cnt];
-	      const time = trkpt.getElementsByTagName('time')[0].textContent;
-	      const lat = trkpt.getAttribute('lat');
-	      const lon = trkpt.getAttribute('lon');
-	      const timeSec = new Date(time).getTime()/1000 - startTimeSec;
-
 	      // Do something with the time, latitude, and longitude data
 	      map.removeLayer(marker);
 	      marker = new L.Marker([lat, lon]);
