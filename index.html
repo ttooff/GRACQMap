@@ -124,18 +124,23 @@
 		// Extract the time, latitude, and longitude data from the GPX file
 	 	return xmlDoc.getElementsByTagName('trkpt');
 	}
-			
+	
+	var marker;
+	
 	readXML()
   	  .then(trkpts => {
-	    const trkpt = trkpts[0];
-            const time = trkpt.getElementsByTagName('time')[0].textContent;
+	     const trkpt = trkpts[0];
+             const time = trkpt.getElementsByTagName('time')[0].textContent;
 	     const lat = trkpt.getAttribute('lat');
 	     const lon = trkpt.getAttribute('lon');
        	     const startTimeSec = new Date(time).getTime()/1000;
 		
-	     var marker = new L.Marker([lat, lon]);
+	     marker = L.Marker([lat, lon]);
              map.addLayer(marker);
-		
+	 });
+	
+	readXML()
+  	  .then(trkpts => {
 	    for (let i = 0; i < trkpts.length; i++) {
 	      const trkpt = trkpts[i];
 	      const time = trkpt.getElementsByTagName('time')[0].textContent;
