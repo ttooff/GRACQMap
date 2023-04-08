@@ -110,7 +110,7 @@
 	player.stopVideo();
       }
 	
-	setInterval(showPlaytime, 55);
+	
 
 	function loadGPXFile(filename) {
 	  var xhr = new XMLHttpRequest();
@@ -139,6 +139,8 @@
 	var t;
 	var cnt = 0;
 	var timeSec = 0;
+	
+	setInterval(showPlaytime, 55);
 	
 	function showPlaytime() {
 		t = !player.getCurrentTime ? 0.0 : player.getCurrentTime();
