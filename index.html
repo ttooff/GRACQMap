@@ -132,22 +132,13 @@
      const lat = trkpt.getAttribute('lat');
      const lon = trkpt.getAttribute('lon');
      const startTimeSec = new Date(time).getTime()/1000;
-
-//	 for (var i = 0; i < trkpts.length; i++) {
-//	     const trkpt = trkpts[i];
-//	     const time = trkpt.getElementsByTagName('time')[0].textContent;
-//	     var timeSec[i] = new Date(time).getTime()/1000 - startTimeSec;
-//	 }
 	
      var marker = new L.Marker([lat, lon]);
      map.addLayer(marker);
-
-	//const trkpt = trkpts[0];
-	//const startTime = trkpt.getElementsByTagName('time')[0].textContent;
-	//const startTimeSec = new Date(time).getTime()/1000;
 	
 	var t;
 	var cnt = 0;
+	var timeSec = 0;
 	
 	function showPlaytime() {
 		t = !player.getCurrentTime ? 0.0 : player.getCurrentTime();
@@ -163,7 +154,7 @@
 		      const time = trkpt.getElementsByTagName('time')[0].textContent;
 		      const lat = trkpt.getAttribute('lat');
 		      const lon = trkpt.getAttribute('lon');
-		      const timeSec = new Date(time).getTime()/1000 - startTimeSec;
+		      timeSec = new Date(time).getTime()/1000 - startTimeSec;
 		}
 		
 	      // Do something with the time, latitude, and longitude data
