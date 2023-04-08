@@ -144,6 +144,8 @@
 		t = !player.getCurrentTime ? 0.0 : player.getCurrentTime();
 		document.getElementById("timer").innerHTML = t.toString();
 		
+		console.log(`Video time: ${t}, GPX time: ${t}`);
+		
 		while (timeSec < t) {
 		      cnt = cnt + 1;
 			if (cnt > trkpts.length) {
