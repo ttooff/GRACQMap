@@ -126,17 +126,19 @@
      map.addLayer(marker);
 	
 	var t;
+	var tPrev;
 	var cnt = 0;
 	var timeSec = 0;
-	
-	function onPlayerStateChange(event) {
-		timeSec = 0;
-	}
-	
+		
 	setInterval(showPlaytime, 25);
 	
 	function showPlaytime() {
 		t = !player.getCurrentTime ? 0.0 : player.getCurrentTime();
+		
+		if (t < tPrev) {
+			timeSec = 0;
+		}
+		
 		document.getElementById("timer").innerHTML = t.toString();
 	      
 		console.log(`Video time: ${t}, GPX time: ${timeSec}, cnt: ${cnt}`);
@@ -153,7 +155,7 @@
 		      lon = trkpt.getAttribute('lon');
 		      timeSec = new Date(time).getTime()/1000 - startTimeSec;
 			
-		  
+		  tPrev = t;
 		}
 		
 	      // Do something with the time, latitude, and longitude data
