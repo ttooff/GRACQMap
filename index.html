@@ -102,17 +102,19 @@
 		event.target.playVideo();
 	}
 	
-	function findPointIdxOnPolyline(trkpts, latlng) {
+	function findPointIdxOnPolyline(track, latlng) {
 	  let prevDiffLat = prevDiffLng = 99999;
 	  let closestIdx = 0;
 	  for(var i = 0; i < track.length; i++) {
-	    var diffLat =  Math.abs(track[i][0] - latlng.lat);
-	    var diffLng = Math.abs(track[i][1] - latlng.lng);
-	    if(diffLat + diffLng < prevDiffLat + prevDiffLng) {
-	      prevDiffLat = diffLat;
-	      prevDiffLng = diffLng;
-	      closestIdx = i;
-    	     }
+		var latClick = trkpt.getAttribute('lat');
+     		var lonClick = trkpt.getAttribute('lon');
+	        var diffLat =  Math.abs(latClick - latlng.lat);
+	        var diffLng = Math.abs(lonClick - latlng.lng);
+	        if(diffLat + diffLng < prevDiffLat + prevDiffLng) {
+	           prevDiffLat = diffLat;
+	           prevDiffLng = diffLng;
+	           closestIdx = i;
+    	       }
  	  }
 	  return closestIdx;
         }
