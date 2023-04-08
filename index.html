@@ -153,9 +153,9 @@
 		      lat = trkpt.getAttribute('lat');
 		      lon = trkpt.getAttribute('lon');
 		      timeSec = new Date(time).getTime()/1000 - startTimeSec;
-			
-		  tPrev = t;
 		}
+		
+	      tPrev = t;
 		
 	      // Do something with the time, latitude, and longitude data
 	      map.removeLayer(marker);
