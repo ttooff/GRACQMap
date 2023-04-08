@@ -129,11 +129,11 @@
 		
      var trkpt = trkpts[0];
      var time = trkpt.getElementsByTagName('time')[0].textContent;
-     const latInit = trkpt.getAttribute('lat');
-     const lonInit = trkpt.getAttribute('lon');
+     var lat = trkpt.getAttribute('lat');
+     var lon = trkpt.getAttribute('lon');
      const startTimeSec = new Date(time).getTime()/1000;
 	
-     var marker = new L.Marker([latInit, lonInit]);
+     var marker = new L.Marker([lat, lon]);
      map.addLayer(marker);
 	
 	var t;
@@ -154,10 +154,10 @@
 				cnt = 0;
 			}
 			
-		      const trkpt = trkpts[cnt];
-		      const time = trkpt.getElementsByTagName('time')[0].textContent;
-		      const lat = trkpt.getAttribute('lat');
-		      const lon = trkpt.getAttribute('lon');
+		      trkpt = trkpts[cnt];
+		      time = trkpt.getElementsByTagName('time')[0].textContent;
+		      lat = trkpt.getAttribute('lat');
+		      lon = trkpt.getAttribute('lon');
 		      timeSec = new Date(time).getTime()/1000 - startTimeSec;
 			
 			console.log(`Video time: ${t}, GPX time: ${timeSec}, cnt: ${cnt}`);
