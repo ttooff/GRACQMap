@@ -74,7 +74,8 @@
 	
 	new L.GPX(gpx, {async: true}).on('loaded', function(e) {
   		map.fitBounds(e.target.getBounds());
-	}).addTo(map);
+	}).addTo(map).on('click', function(e) {
+    		console.log(e.latlng); }
 
 	var tag = document.createElement('script');
 
