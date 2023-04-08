@@ -127,6 +127,11 @@
 	
 	var marker;
 	
+	trackpts = readXML()
+  	  .then(trkpts => {
+		return trackpts;
+	});
+		
 	readXML()
   	  .then(trkpts => {
 	     const trkpt = trkpts[0];
@@ -137,10 +142,7 @@
 		
 	     marker = new L.Marker([lat, lon]);
              map.addLayer(marker);
-	 });
-	
-	readXML()
-  	  .then(trkpts => {
+
 	    for (let i = 0; i < trkpts.length; i++) {
 	      const trkpt = trkpts[i];
 	      const time = trkpt.getElementsByTagName('time')[0].textContent;
