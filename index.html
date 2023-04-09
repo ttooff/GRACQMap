@@ -81,7 +81,8 @@
 		timeSec = 0;
 		var timeNew = trkpts[cnt].getElementsByTagName('time')[0].textContent;
 		timeNewSec = new Date(timeNew).getTime()/1000 - startTimeSec;
-		player.seekTo(timeNewSec,true);
+		player.seekTo(timeNewSec, true);
+		console.log(`New video time: ${timeNewSec}`);
 	});
 
 	var tag = document.createElement('script');
