@@ -13,9 +13,6 @@
 		integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
 		crossorigin="">
 	</script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js">
-	</script>
 </head>
 	
 <body>
@@ -73,17 +70,6 @@
 	var gpxData;
 	
 	var clickIndex;
-	
-//	new L.GPX(gpx, {async: true}).on('loaded', function(e) {
- // 		map.fitBounds(e.target.getBounds());
-//	}).addTo(map).on('click', function(e) {
-//		cnt = findPointIdxOnPolyline(trkpts, e.latlng);
-//		timeSec = 0;
-//		var timeNew = trkpts[cnt].getElementsByTagName('time')[0].textContent;
-//		timeNewSec = new Date(timeNew).getTime()/1000 - startTimeSec;
-//		player.seekTo(timeNewSec, true);
-//		console.log(`New video time: ${timeNewSec}`);
-//	});
 
 	var tag = document.createElement('script');
 
@@ -131,6 +117,7 @@
 	  return closestIdx;
         }
 	
+	// Load data from GPX file
 	function loadGPXFile(filename) {
 	  var xhr = new XMLHttpRequest();
 	  xhr.open("GET", filename, false);
@@ -143,10 +130,11 @@
 	    throw new Error("Failed to load GPX file: " + filename);
 	  }
 	}
-		
+	
 	var trkpts = loadGPXFile('GH030798_1_GPS5.gpx');
-		
-	var latlngs = []; // Initialize an empty array for the LatLng objects
+	
+	// Create polyline object and add to map
+	var latlngs = [];
 	for (var i = 0; i < trkpts.length; i++) {
 	  var lat = trkpts[i].getAttribute("lat");
 	  var lng = trkpts[i].getAttribute("lon");
@@ -179,6 +167,7 @@
 	var cnt = 0;
 	var timeSec = 0;
 		
+	// Update marker every 25ms
 	setInterval(showPlaytime, 25);
 	
 	function showPlaytime() {
