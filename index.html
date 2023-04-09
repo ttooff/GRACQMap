@@ -74,16 +74,16 @@
 	
 	var clickIndex;
 	
-	new L.GPX(gpx, {async: true}).on('loaded', function(e) {
-  		map.fitBounds(e.target.getBounds());
-	}).addTo(map).on('click', function(e) {
-		cnt = findPointIdxOnPolyline(trkpts, e.latlng);
-		timeSec = 0;
-		var timeNew = trkpts[cnt].getElementsByTagName('time')[0].textContent;
-		timeNewSec = new Date(timeNew).getTime()/1000 - startTimeSec;
-		player.seekTo(timeNewSec, true);
-		console.log(`New video time: ${timeNewSec}`);
-	});
+//	new L.GPX(gpx, {async: true}).on('loaded', function(e) {
+ // 		map.fitBounds(e.target.getBounds());
+//	}).addTo(map).on('click', function(e) {
+//		cnt = findPointIdxOnPolyline(trkpts, e.latlng);
+//		timeSec = 0;
+//		var timeNew = trkpts[cnt].getElementsByTagName('time')[0].textContent;
+//		timeNewSec = new Date(timeNew).getTime()/1000 - startTimeSec;
+//		player.seekTo(timeNewSec, true);
+//		console.log(`New video time: ${timeNewSec}`);
+//	});
 
 	var tag = document.createElement('script');
 
