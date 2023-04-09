@@ -16,8 +16,8 @@
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js">
 	</script>
-	
 </head>
+	
 <body>
  <style>
     body {
@@ -37,12 +37,12 @@
   	  flex: 50%;
 	}
 	#map {
-      height: 100%;
-      width: 100%;
+     	  height: 100%;
+     	  width: 100%;
     }
 	#player {
-      height: 50%
-      width: 100%;
+    	  height: 50%
+      	  width: 100%;
     }
   </style>
   
@@ -171,14 +171,13 @@
 		}
 		
 		document.getElementById("timer").innerHTML = videoState.toString();
-	      
 		console.log(`Video time: ${t}, GPX time: ${timeSec}, cnt: ${cnt}`);
 	
-		while (timeSec < t && videoState != YT.PlayerState.ENDED ) {
+		while (timeSec < t && cnt < trkpts.length-1 && videoState != YT.PlayerState.ENDED ) {
 		      cnt = cnt + 1;
-		      if (cnt > trkpts.length-1) {
-				cnt = 0;
-		      }
+		     // if (cnt > trkpts.length-1) {
+			// cnt = 0;
+		     // }
 			
 		      trkpt = trkpts[cnt];
 		      time = trkpt.getElementsByTagName('time')[0].textContent;
