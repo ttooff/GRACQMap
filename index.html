@@ -146,6 +146,16 @@
 		
 	var trkpts = loadGPXFile('GH030798_1_GPS5.gpx');
 		
+	var latlngs = []; // Initialize an empty array for the LatLng objects
+	for (var i = 0; i < trkpts.length; i++) {
+	  var lat = trkpts[i].getAttribute("lat");
+	  var lng = trkpts[i].getAttribute("lon");
+	  var latlng = L.latLng(lat, lng);
+	  latlngs.push(latlng);
+	}
+	var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
+	
+	
      var trkpt = trkpts[0];
      var time = trkpt.getElementsByTagName('time')[0].textContent;
      var lat = trkpt.getAttribute('lat');
