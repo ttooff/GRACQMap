@@ -59,6 +59,7 @@
 
 	var map = L.map('map').setView(coords, zoomLevel);
 
+	// OpenCycleMap
 	//L.tileLayer('http://a.tile.thunderforest.com/cycle/{z}/{x}/{y}.png', {
 	//	maxZoom: 19,
 	//	attribution: '&copy; <a href="https://www.opencyclemap.org/">OpenCycleMap</a>, &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
@@ -174,7 +175,7 @@
 	  weight: 5
 	}).on('add', function (e) {
 	  map.fitBounds(e.target.getBounds());
-	}).addTo(map);
+	}).addTo(map).bringToFront();
 	// Add a click event listener to the polyline
 	polylineGPX.on('click', function (e) {
 	  // Find the index of the clicked point on the polyline
