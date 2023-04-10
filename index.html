@@ -152,7 +152,7 @@
 	  var latlng = L.latLng(lat, lng);
 	  latlngs.push(latlng);
 	}
-	var polyline = L.polyline(latlngs, {color: 'blue'}).on('add', function(e) {
+	var polyline = L.polyline(latlngs, {color: 'blue', weight: 5}).on('add', function(e) {
  		map.fitBounds(e.target.getBounds());
 	}).addTo(map).on('click', function(e) {
 		cnt = findPointIdxOnPolyline(trkpts, e.latlng);
