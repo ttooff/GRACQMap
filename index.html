@@ -189,8 +189,8 @@
 			cnt = 0;
 		}
 		
-		// Pause video if at 1 second from end
-		if (t > player.getDuration()-0.001) {
+		// Pause video if at 0.1 second from end
+		if (t > player.getDuration()-0.1) {
 			player.pauseVideo();
 		}
 		console.log(`Video time: ${t}, GPX time: ${timeSec}, cnt: ${cnt}`);
