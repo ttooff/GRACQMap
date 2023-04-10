@@ -158,9 +158,10 @@
 	var polyline = L.polyline(latlngs, {
 	  color: 'blue',
 	  weight: 5
-	})
+	}).addTo(map);
+	
 	// Add the polyline to the map and fit the map to its bounds
-	polyline.addTo(map).on('add', function (e) {
+	polyline.on('add', function (e) {
 	  map.fitBounds(e.target.getBounds());
 	})
 	// Add a click event listener to the polyline
