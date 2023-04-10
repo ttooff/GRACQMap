@@ -145,10 +145,18 @@
 	var trkpts = loadGPXFile('GH030798_1_GPS5.gpx');
 	
 	async function addGeoJson() {
-  	  const response = await fetch("PN.geojson");
-   	  const data = await response.json();
-   	  L.geoJson(data).addTo(map);
+ 	  const response = await fetch("PN.geojson");
+ 	  const data = await response.json();
+
+	  L.geoJson(data, {
+	    style: {
+	      color: "green",
+	      weight: 5,
+	      opacity: 1
+	    }
+	  }).addTo(map);
 	}
+
 	addGeoJson();
 	
 	// Create polyline object and add to map
