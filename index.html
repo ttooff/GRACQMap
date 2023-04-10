@@ -58,12 +58,6 @@
 	var zoomLevel = 10; // the map scale. See: http://wiki.openstreetmap.org/wiki/Zoom_levels
 
 	var map = L.map('map').setView(coords, zoomLevel);
-
-	// OpenCycleMap
-	//L.tileLayer('http://a.tile.thunderforest.com/cycle/{z}/{x}/{y}.png', {
-	//	maxZoom: 19,
-	//	attribution: '&copy; <a href="https://www.opencyclemap.org/">OpenCycleMap</a>, &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
-	//}).addTo(map);
 	
 	L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     	  maxZoom: 19,
@@ -188,7 +182,6 @@
 	  console.log(`New video time: ${timeNewSec}`);
 	});
 	
-	
      var trkpt = trkpts[0];
      var time = trkpt.getElementsByTagName('time')[0].textContent;
      var lat = trkpt.getAttribute('lat');
@@ -217,27 +210,18 @@
 		console.log(`Video time: ${t}, GPX time: ${timeSec}, cnt: ${cnt}`);
 	
 		while (timeSec < t && cnt < trkpts.length-1 && videoState != YT.PlayerState.ENDED ) {
-		      cnt = cnt + 1;
-		     // if (cnt > trkpts.length-1) {
-			// cnt = 0;
-		     // }
-			
+		      cnt = cnt + 1;			
 		      trkpt = trkpts[cnt];
 		      time = trkpt.getElementsByTagName('time')[0].textContent;
 		      lat = trkpt.getAttribute('lat');
 		      lon = trkpt.getAttribute('lon');
 		      timeSec = new Date(time).getTime()/1000 - startTimeSec;
 		}
-		
 	      tPrev = t;
-		
-	      // Do something with the time, latitude, and longitude data
+
 	      map.removeLayer(marker);
 	      marker = new L.Marker([lat, lon]);
 	      map.addLayer(marker);
-		//const trkpt = trkpts[cnt];
-		//const time = trkpt.getElementsByTagName('time')[0].textContent;
-	     //console.log(`Time in sec: ${timeSec}, Latitude: ${lat}, Longitude: ${lon}`);
 	}
 	
 	
