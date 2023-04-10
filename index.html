@@ -156,7 +156,11 @@
 		  var timeNew = trkpts[pointIndex].getElementsByTagName('time')[0].textContent;
 		  var timeNewSec = new Date(timeNew).getTime() / 1000 - startTimeSec;
 		  // Seek the video player to the new time and log the time to the console
+		  if (timeNewSec > player.getDuration()-0.2) {
+		    timeNewSec = player.getDuration()-0.25;
+		  }
 		  player.seekTo(timeNewSec, true);
+		  player.playVideo();
 		  console.log(`New video time: ${timeNewSec}`);
 		});
 	}
@@ -189,7 +193,7 @@
 			cnt = 0;
 		}
 		
-		// Pause video if at 0.1 second from end
+		// Pause video if at 0.2 second from end
 		if (t > player.getDuration()-0.2) {
 			player.pauseVideo();
 		}
