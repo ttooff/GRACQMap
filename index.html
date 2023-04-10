@@ -86,8 +86,10 @@
 			height: '100%',
 			width: '100%',
 			videoId: 'WMQzJ3aAE_M',
-			controls: '0',
-			fs: '0',
+			 playerVars: {
+   				 controls: 0,
+				 fs: 0
+ 			 },
 			events: {
 				'onReady': onPlayerReady,
 				'onStateChange': onStateChange
