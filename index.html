@@ -143,7 +143,7 @@
 	}
 	
 	var trkpts = loadGPXFile('GH030798_1_GPS5.gpx');
-	//var pn = loadGPXFile('PN.gpx');
+	var pn = loadGPXFile('PN.gpx');
 	
 	// Create polyline object and add to map
 	var latlngs = [];
@@ -154,16 +154,14 @@
 	  latlngs.push(latlng);
 	}
 	
-	// Define a polyline with latlngs, color, and weight
+	// Define and add to map a polyline with latlngs, color, and weight
 	var polylineGPX = L.polyline(latlngs, {
 	  color: 'blue',
 	  weight: 5
-	}).addTo(map);
-	
-	// Add the polyline to the map and fit the map to its bounds
-	polylineGPX.on('add', function (e) {
+	}).on('add', function (e) {
 	  map.fitBounds(e.target.getBounds());
-	})
+	}).addTo(map)
+	
 	// Add a click event listener to the polyline
 	polylineGPX.on('click', function (e) {
 	  // Find the index of the clicked point on the polyline
