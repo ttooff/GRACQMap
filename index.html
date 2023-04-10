@@ -156,8 +156,8 @@
 		  var timeNew = trkpts[pointIndex].getElementsByTagName('time')[0].textContent;
 		  var timeNewSec = new Date(timeNew).getTime() / 1000 - startTimeSec;
 		  // Seek the video player to the new time and log the time to the console
-		  if (timeNewSec > player.getDuration()-0.2) {
-		    timeNewSec = player.getDuration()-0.25;
+		  if (timeNewSec > player.getDuration()-0.5) {
+		    timeNewSec = player.getDuration()-0.5;
 		  }
 		  player.seekTo(timeNewSec, true);
 		  player.playVideo();
