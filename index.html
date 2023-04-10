@@ -143,6 +143,7 @@
 	}
 	
 	var trkpts = loadGPXFile('GH030798_1_GPS5.gpx');
+	var pn = loadGPXFile('PN.gpx');
 	
 	// Create polyline object and add to map
 	var latlngs = [];
@@ -152,15 +153,26 @@
 	  var latlng = L.latLng(lat, lng);
 	  latlngs.push(latlng);
 	}
-	var polyline = L.polyline(latlngs, {color: 'blue', weight: 5}).on('add', function(e) {
- 		map.fitBounds(e.target.getBounds());
-	}).addTo(map).on('click', function(e) {
-		cnt = findPointIdxOnPolyline(trkpts, e.latlng);
-		timeSec = 0;
-		var timeNew = trkpts[cnt].getElementsByTagName('time')[0].textContent;
-		timeNewSec = new Date(timeNew).getTime()/1000 - startTimeSec;
-		player.seekTo(timeNewSec, true);
-		console.log(`New video time: ${timeNewSec}`);
+	
+	// Define a polyline with latlngs, color, and weight
+	var polyline = L.polyline(latlngs, {
+	  color: 'blue',
+	  weight: 5
+	})
+	// Add the polyline to the map and fit the map to its bounds
+	polyline.addTo(map).on('add', function (e) {
+	  map.fitBounds(e.target.getBounds());
+	})
+	// Add a click event listener to the polyline
+	polyline.on('click', function (e) {
+	  // Find the index of the clicked point on the polyline
+	  var pointIndex = findPointIdxOnPolyline(trkpts, e.latlng);
+	  // Get the time of the clicked point and calculate the time in seconds
+	  var timeNew = trkpts[pointIndex].getElementsByTagName('time')[0].textContent;
+	  var timeNewSec = new Date(timeNew).getTime() / 1000 - startTimeSec;
+	  // Seek the video player to the new time and log the time to the console
+	  player.seekTo(timeNewSec, true);
+	  console.log(`New video time: ${timeNewSec}`);
 	});
 	
 	
