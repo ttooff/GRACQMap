@@ -158,6 +158,7 @@
 		  // Seek the video player to the new time and log the time to the console
 		  if (timeNewSec > player.getDuration()-0.5) {
 		    timeNewSec = player.getDuration()-0.5;
+	            tPrev = timeNewSec;
 		  }
 		  player.seekTo(timeNewSec, true);
 		  player.playVideo();
