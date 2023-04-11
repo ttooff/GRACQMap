@@ -179,7 +179,7 @@
 		}
 		console.log(`Video time: ${t}, GPX time: ${timeSec}, cnt: ${cnt}`);
 	
-		while (timeSec < t && cnt < trkpts.length-1 && videoState != YT.PlayerState.ENDED ) {
+		while (timeSec < t && cnt < trkpts.length-1 ) {
 		      cnt = cnt + 1;			
 		      trkpt = trkpts[cnt];
 		      time = trkpt.getElementsByTagName('time')[0].textContent;
