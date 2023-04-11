@@ -199,6 +199,10 @@
 	function showPlaytime() {
 		t = !player.getCurrentTime ? 0.0 : player.getCurrentTime();
 		
+		t = player.getCurrentTime().then(function(seconds) {
+ 		  return seconds;
+		});
+		
 		// Reset GPX timer if video player went back
 		if (t < tPrev) {
 			timeSec = 0;
