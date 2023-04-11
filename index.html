@@ -110,11 +110,13 @@
 	var vimeoOptions = {
       		id: 816325469,
         	frameborder: 0,
-        	background: false,
-		loop: false,
-		controls: false
+        	background: true
    	};
 	var player = new Vimeo.Player('player', vimeoOptions);
+	var videoDuration; 
+	player.getCurrentTime().then(function(seconds) {
+ 		  videoDuration = seconds;
+	});
 	
 	function findPointIdxOnPolyline(track, latlng) {
 	  let prevDiffLat = prevDiffLng = 99999;
@@ -167,8 +169,8 @@
 		  var timeNew = trkpts[pointIndex].getElementsByTagName('time')[0].textContent;
 		  var timeNewSec = new Date(timeNew).getTime() / 1000 - startTimeSec;
 		  // Seek the video player to the new time and log the time to the console
-		  if (timeNewSec > player.getDuration()-0.5) {
-		    timeNewSec = player.getDuration()-0.5;
+		  if (timeNewSec > videoDuration-0.5) {
+		    timeNewSec = videoDuration-0.5;
 	            tPrev = timeNewSec;
 		  }
 		  //player.seekTo(timeNewSec, true);
@@ -212,8 +214,8 @@
 		}
 		
 		// Pause video if at 0.2 second from end
-		if (t > player.getDuration()-0.2) {
-			//player.pauseVideo();
+		if (t > videoDuration-0.2) {
+			player.pause();
 		}
 		console.log(`Video time: ${t}, GPX time: ${timeSec}, cnt: ${cnt}`);
 	
