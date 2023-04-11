@@ -13,6 +13,7 @@
 		integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
 		crossorigin="">
 	</script>
+	<script src="https://player.vimeo.com/api/player.js"></script>
 </head>
 	
 <body>
@@ -49,6 +50,7 @@
 	</div>
 	<div class="column">
 		<div id="player"></div>
+		<div id="vimeoPlayer"></div>
 	</div>
 </div>
 
@@ -105,6 +107,15 @@
 	function onStateChange(event) {
 		videoState = event.data;
 	}
+	
+	// Vimeo player
+	 var vimeoOptions = {
+      		id: 58479
+   	 };
+	var vimeoPlayer = new Vimeo.Player('vimeoPlayer');
+	video01Player.on('play', function() {
+      		console.log('Played the first video');
+    	});
 	
 	function findPointIdxOnPolyline(track, latlng) {
 	  let prevDiffLat = prevDiffLng = 99999;
