@@ -114,7 +114,7 @@
    	};
 	var player = new Vimeo.Player('player', vimeoOptions);
 	var videoDuration; 
-	player.getCurrentTime().then(function(seconds) {
+	player.getDuration().then(function(seconds) {
  		  videoDuration = seconds;
 	});
 	
