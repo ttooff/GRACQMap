@@ -77,9 +77,9 @@
 	var firstScriptTag = document.getElementsByTagName('script')[0];
 	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-	var player;
+	var YTplayer;
 	function onYouTubeIframeAPIReady() {
-		player = new YT.Player('player', {
+		YTplayer = new YT.Player('player', {
 			height: '100%',
 			width: '100%',
 			videoId: 'WMQzJ3aAE_M',
@@ -108,13 +108,12 @@
 	}
 	
 	// Vimeo player
-	 var vimeoOptions = {
-      		id: 58479
-   	 };
-	var vimeoPlayer = new Vimeo.Player('vimeoPlayer', vimeoOptions);
-	videoPlayer.on('play', function() {
-      		console.log('Played the first video');
-    	});
+	var vimeoOptions = {
+      		id: 816325469,
+        	frameborder: 0,
+        	background: true
+   	};
+	var player = new Vimeo.Player('vimeoPlayer', vimeoOptions);
 	
 	function findPointIdxOnPolyline(track, latlng) {
 	  let prevDiffLat = prevDiffLng = 99999;
@@ -171,22 +170,24 @@
 		    timeNewSec = player.getDuration()-0.5;
 	            tPrev = timeNewSec;
 		  }
-		  player.seekTo(timeNewSec, true);
-		  player.playVideo();
+		  //player.seekTo(timeNewSec, true);
+		  //player.playVideo();
+		  player.setCurrentTime(timeNewSec);
+	   	  player.play();
 		  console.log(`New video time: ${timeNewSec}`);
 		});
 	}
 
 	addGeoJson();
 	
-     var trkpt = trkpts[0];
-     var time = trkpt.getElementsByTagName('time')[0].textContent;
-     var lat = trkpt.getAttribute('lat');
-     var lon = trkpt.getAttribute('lon');
-     const startTimeSec = new Date(time).getTime()/1000;
-	
-     var marker = new L.Marker([lat, lon]);
-     map.addLayer(marker);
+	var trkpt = trkpts[0];
+	var time = trkpt.getElementsByTagName('time')[0].textContent;
+	var lat = trkpt.getAttribute('lat');
+	var lon = trkpt.getAttribute('lon');
+	const startTimeSec = new Date(time).getTime()/1000;
+
+	var marker = new L.Marker([lat, lon]);
+	map.addLayer(marker);
 	
 	var t;
 	var tPrev = 0;
@@ -207,7 +208,7 @@
 		
 		// Pause video if at 0.2 second from end
 		if (t > player.getDuration()-0.2) {
-			player.pauseVideo();
+			//player.pauseVideo();
 		}
 		console.log(`Video time: ${t}, GPX time: ${timeSec}, cnt: ${cnt}`);
 	
