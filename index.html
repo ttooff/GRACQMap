@@ -128,6 +128,15 @@
  	  const response = await fetch("PN.geojson");
  	  const data = await response.json();
 
+	 L.geoJson(data, {
+	    style: {
+	      color: "green",
+	      weight: 3,
+	      opacity: 1,
+	      fillColor: 'green'
+	    }
+	  }).addTo(map);
+		
 	  L.geoJson(data, {
 	    style: {
 	      color: "black",
