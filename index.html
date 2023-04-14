@@ -136,8 +136,7 @@
 	      fillColor: 'green'
 	    },
 		pointToLayer: function(feature, latlng) {
-		
-			return L.circleMarker(latlng, {
+		     return L.circleMarker(latlng, {
 			    radius: 13,
 			    fillColor: "black",
 			    color: "black",
@@ -162,8 +161,7 @@
 			     	 html: 'BLABLA', //feature.properties.rcn_ref,
 			    	  iconSize: [80, 40]
 		    	      });
-		    return L.circleMarker(latlng, {
-			    radius: 12,
+		    return L.marker(latlng, {
 			    fillColor: "green",
 			    color: "green",
 			    weight: 1,
