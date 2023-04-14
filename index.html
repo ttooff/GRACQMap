@@ -139,7 +139,7 @@
 		pointToLayer: function(feature, latlng) {
 		      var markerIcon = L.divIcon({
 			      className: 'my-div-icon',
-			      html: feature.properties.name,
+			      html: feature.properties.rcn_ref,
 			      iconSize: [80, 40]
 		      });
 			return L.circleMarker(latlng, {
