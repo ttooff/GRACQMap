@@ -135,8 +135,14 @@
 	      opacity: 1,
 	      fillColor: 'green'
 	    },
+		  
 		pointToLayer: function(feature, latlng) {
-		    return L.circleMarker(latlng, {
+		      var markerIcon = L.divIcon({
+			      className: 'my-div-icon',
+			      html: feature.properties.name,
+			      iconSize: [80, 40]
+		      });
+			return L.circleMarker(latlng, {
 			    radius: 14,
 			    fillColor: "black",
 			    color: "black",
