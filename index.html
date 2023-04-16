@@ -173,7 +173,7 @@
 		  // Seek the video player to the new time and log the time to the console
 		  player.setCurrentTime(timeNewSec);
 	   	  player.play();
-		  console.log(`New video time: ${timeNewSec}`);
+		  //console.log(`New video time: ${timeNewSec}`);
 	    });
 	}
 
@@ -206,7 +206,7 @@
 			timeSec = 0;
 			cnt = 0;
 		}
-		console.log(`Video time: ${t}, GPX time: ${timeSec}, cnt: ${cnt}`);
+		//console.log(`Video time: ${t}, GPX time: ${timeSec}, cnt: ${cnt}`);
 	
 		while (timeSec < t && cnt < trkpts.length-1 ) {
 		      cnt = cnt + 1;			
