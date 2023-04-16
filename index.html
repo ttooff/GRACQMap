@@ -99,7 +99,7 @@
         videoDuration = seconds;
       });
 
-      function findPointIdxOnPolyline(track, latlng) {
+      function findPointIdxOnGPXPolyline(track, latlng) {
         let prevDiffLat = prevDiffLng = 99999;
         let closestIdx = 0;
         for (var i = 0; i < track.length; i++) {
@@ -116,6 +116,23 @@
         return closestIdx;
       }
 
+      function projectOnPNPolyLine(track, latlng) {
+        let prevDiffLat = prevDiffLng = 99999;
+        let closestIdx = 0;
+        for (var i = 0; i < track.length; i++) {
+          var latTmp = trkpts[i].getAttribute('lat');
+          var lonTmp = trkpts[i].getAttribute('lon');
+          var diffLat = Math.abs(latTmp - latlng.lat);
+          var diffLng = Math.abs(lonTmp - latlng.lng);
+          if (diffLat + diffLng < prevDiffLat + prevDiffLng) {
+            prevDiffLat = diffLat;
+            prevDiffLng = diffLng;
+            closestIdx = i;
+          }
+        }
+        return closestIdx;
+      }
+      
       // Load data from GPX file
       function loadGPXFile(filename) {
         var xhr = new XMLHttpRequest();
@@ -137,7 +154,7 @@
         const response = await fetch("PNall.geojson");
         const data = await response.json();
 
-        L.geoJson(data, {
+        dataPN = L.geoJson(data, {
           style: {
             color: 'green',
             weight: 6,
@@ -151,7 +168,9 @@
               fillOpacity: 1
             });
           }
-        }).addTo(map);
+        });
+        
+        dataPN.addTo(map);
 
         L.geoJson(data, {
           style: {
@@ -173,7 +192,7 @@
           }
         }).addTo(map).on('click', function(e) {
           // Find the index of the clicked point on the polyline
-          var pointIndex = findPointIdxOnPolyline(trkpts, e.latlng);
+          var pointIndex = findPointIdxOnGPXPolyline(trkpts, e.latlng);
           // Get the time of the clicked point and calculate the time in seconds
           var timeNew = trkpts[pointIndex].getElementsByTagName('time')[0].textContent;
           var timeNewSec = new Date(timeNew).getTime() / 1000 - startTimeSec;
