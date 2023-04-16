@@ -70,8 +70,6 @@
         <img src="GRACQHesbayeLogo.jpg" height="25%">
       </div>
     </div>
-  </body>
-</html>
 
     <script>
       var coords = [50.70513595799738, 5.271691432079298]; // the geographic center of our map
@@ -158,7 +156,7 @@
         L.geoJson(data, {
           style: {
             color: 'transparent',
-            weight: 36,
+            weight: 36,   // to ease clicking on mobile devices
             opacity: 1
           },
           pointToLayer: function(feature, latlng) {
