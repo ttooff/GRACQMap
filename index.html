@@ -85,24 +85,7 @@
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       }).addTo(map);
 
-      var clickPN = '';
-      map.on('click', function(e) {
-          // Find the index of the clicked point on the polyline
-          var pointIndex = findPointIdxOnPolyline(trkpts, e.latlng);
-          // Get the time of the clicked point and calculate the time in seconds
-          var timeNew = trkpts[pointIndex].getElementsByTagName('time')[0].textContent;
-          var timeNewSec = new Date(timeNew).getTime() / 1000 - startTimeSec;
-          // Seek the video player to the new time and log the time to the console
-          player.setCurrentTime(timeNewSec);
-          // Pause video if clicked on a PN
-          if (clickPN !== '') {
-            player.pause();
-            clickPN = '';
-          } else {
-            player.play();
-          };
-          //console.log(`New video time: ${timeNewSec}`);
-        });
+    
       
       var gpx = 'GH030798_1_GPS5.gpx';
       var gpxData;
@@ -197,6 +180,25 @@
 
       addGeoJson();
 
+      var clickPN = '';
+      map.on('click', function(e) {
+          // Find the index of the clicked point on the polyline
+          var pointIndex = findPointIdxOnPolyline(trkpts, e.latlng);
+          // Get the time of the clicked point and calculate the time in seconds
+          var timeNew = trkpts[pointIndex].getElementsByTagName('time')[0].textContent;
+          var timeNewSec = new Date(timeNew).getTime() / 1000 - startTimeSec;
+          // Seek the video player to the new time and log the time to the console
+          player.setCurrentTime(timeNewSec);
+          // Pause video if clicked on a PN
+          if (clickPN !== '') {
+            player.pause();
+            clickPN = '';
+          } else {
+            player.play();
+          };
+          //console.log(`New video time: ${timeNewSec}`);
+      });
+      
       var trkpt = trkpts[0];
       var time = trkpt.getElementsByTagName('time')[0].textContent;
       var lat = trkpt.getAttribute('lat');
