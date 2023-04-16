@@ -22,6 +22,7 @@
       .row {
         display: flex;
         height: 100%;
+        flex-direction: row;
       }
       .column {
         flex: 50%;
@@ -47,6 +48,16 @@
         font-size: 16px;
         color: white;
         text-align: center;
+      }
+      /* Media query for portrait screens */
+      @media screen and (orientation: portrait) {
+        .row {
+          flex-direction: column;
+        }
+        .column {
+          flex: 100%;
+          height: 50%; /* added */
+        }
       }
     </style>
 
