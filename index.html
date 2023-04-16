@@ -196,9 +196,9 @@
       var tMap = 0;
 
       // Update marker every 25ms
-      setInterval(showPlaytime, 25);
+      setInterval(updateMarker, 25);
 
-      function showPlaytime() {
+      function updateMarker() {
         player.getCurrentTime().then(function(seconds) {
           tPlayer = seconds;
         });
