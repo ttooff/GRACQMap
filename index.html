@@ -268,7 +268,7 @@
         var nearestPoints = [];
         dataPN.eachLayer(function(layer) {
           var feature = layer.feature;
-          if (feature.geometryType !== "Point") {
+          if (feature.geometry.type !== "Point") {
             var nearestPoint = turf.nearestPointOnLine(feature.geometry, turf.point([coord.lat, coord.lng]));
             nearestPoints.push(nearestPoint);
           }
