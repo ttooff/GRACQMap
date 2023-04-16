@@ -15,33 +15,26 @@
         margin: 0;
         overflow: hidden;
       }
-
-      html,
-      body {
+      html, body {
         height: 100%;
         width: 100%;
       }
-
       .row {
         display: flex;
         height: 100%;
       }
-
       .column {
         flex: 50%;
       }
-
       #map {
         height: 100%;
         width: 100%;
       }
-
       #player {
         position: relative;
         width: 100%;
         padding-top: 100%;
       }
-
       #player iframe {
         position: absolute;
         top: 0;
@@ -49,14 +42,12 @@
         width: 100%;
         height: 100%;
       }
-
       .my-div-icon {
         background-color: transparent;
         font-size: 16px;
         color: white;
         text-align: center;
       }
-
     </style>
 
     <div class="row">
@@ -65,6 +56,7 @@
       </div>
       <div class="column">
         <div id="player"></div>
+         <div id="status"></div>
       </div>
     </div>
 
@@ -201,7 +193,7 @@
       var tPlayer;
       var tPrev = 0;
       var cnt = 0;
-      var timeSec = 0;
+      var tMap = 0;
 
       // Update marker every 25ms
       setInterval(showPlaytime, 25);
@@ -213,18 +205,18 @@
 
         // Reset GPX timer if video player went back
         if (tPlayer < tPrev) {
-          timeSec = 0;
+          tMap = 0;
           cnt = 0;
         }
         //console.log(`Video time: ${t}, GPX time: ${timeSec}, cnt: ${cnt}`);
 
-        while (timeSec <= tPlayer && cnt < trkpts.length - 1) {
+        while (tMap <= tPlayer && cnt < trkpts.length - 1) {
           cnt = cnt + 1;
           trkpt = trkpts[cnt];
           time = trkpt.getElementsByTagName('time')[0].textContent;
           lat = trkpt.getAttribute('lat');
           lon = trkpt.getAttribute('lon');
-          timeSec = new Date(time).getTime() / 1000 - startTimeSec;
+          tMap = new Date(time).getTime() / 1000 - startTimeSec;
         }
         tPrev = tPlayer;
 
