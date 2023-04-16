@@ -158,9 +158,9 @@
 		 pointToLayer: function(feature, latlng) {
 		    return L.marker(latlng, {
 			      icon: L.divIcon({
-			      class: 'my-div-icon',
-			      html: feature.properties.rcn_ref
-		    	    })
+			        className: 'my-div-icon',
+			        html: feature.properties.rcn_ref
+		    	      })
     		    });
 	        }
 	  }).addTo(map).on('click', function (e) {
