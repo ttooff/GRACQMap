@@ -268,7 +268,7 @@
       // Find the nearest point on each polyline
       var nearestPoints = [];
       dataPN.eachLayer(function(layer) {
-        var nearestPoint = turf.nearestPointOnLine(layer.toGeoJSON(), turf.point([p.lng, p.lat]));
+        var nearestPoint = turf.nearestPointOnLine(layer.toGeoJSON(), turf.point([50, 5]));
         nearestPoints.push(nearestPoint);
       });
 
