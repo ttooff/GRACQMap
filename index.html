@@ -194,6 +194,9 @@
         }).addTo(map).on('click', function(e) {
           // Find the index of the clicked point on the polyline
           var pointIndex = findPointIdxOnGPXPolyline(trkpts, e.latlng);
+          
+          findNearestPoint(e.latlng);
+          
           // Get the time of the clicked point and calculate the time in seconds
           var timeNew = trkpts[pointIndex].getElementsByTagName('time')[0].textContent;
           var timeNewSec = new Date(timeNew).getTime() / 1000 - startTimeSec;
@@ -259,32 +262,32 @@
         // Add some text to the div
         //myDiv.innerHTML = "Hello, world!";
       }
-      
-      // Import Turf.js library and set the CRS of your map
-      var crs = L.CRS.EPSG3857;
-      var options = {crs: crs};
-      var nearestPointLayer = L.geoJSON(null, options).addTo(map);
-      
-      // Find the nearest point on each polyline
-      var nearestPoints = [];
-      dataPN.eachLayer(function(layer) {
-        var nearestPoint = turf.nearestPointOnLine(layer.toGeoJSON(), turf.point([50, 5]));
-        nearestPoints.push(nearestPoint);
-      });
+            
+      function findNearestPoint(coord) {
+        // Find the nearest point on each polyline
+        var nearestPoints = [];
+        dataPN.eachLayer(function(layer) {
+          var feature = layer.feature;
+          if (feature.geometryType !== "Point") {
+            var nearestPoint = turf.nearestPointOnLine(feature.geometry, turf.point([coord.lat, coord.lng]));
+            nearestPoints.push(nearestPoint);
+          }
+        });
 
-      // Find the nearest point overall
-      var nearestPoint = nearestPoints.reduce(function(prev, current) {
-        var prevDist = turf.distance(turf.point([p.lng, p.lat]), prev);
-        var currentDist = turf.distance(turf.point([p.lng, p.lat]), current);
-        return (prevDist < currentDist) ? prev : current;
-      });
+        // Find the nearest point overall
+        var nearestPoint = nearestPoints.reduce(function(prev, current) {
+          var prevDist = turf.distance(turf.point([coord.lat, coord.lng]), prev);
+          var currentDist = turf.distance(turf.point([coord.lat, coord.lng]), current);
+          return (prevDist < currentDist) ? prev : current;
+        });    
 
-      // Add the nearest point to the map as a marker
-      var marker = L.marker([nearestPoint.geometry.coordinates[1], nearestPoint.geometry.coordinates[0]]);
-      marker.addTo(nearestPointLayer);
+        // Add the nearest point to the map as a marker
+        L.marker([nearestPoint.geometry.coordinates[1], nearestPoint.geometry.coordinates[0]]).addTo(map);
+       
+        // Log the nearest point coordinates
+        console.log('Nearest point coordinates:', markerNearest.getLatLng());
+      }
 
-      // Log the nearest point coordinates
-      console.log('Nearest point coordinates:', marker.getLatLng());
     </script>
   </body>
 </html>
