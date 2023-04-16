@@ -157,7 +157,7 @@
 		 pointToLayer: function(feature, latlng) {
 			       var markerIcon = L.divIcon({
 				  class: 'blabla',
-			     	 html: feature.properties.rcn_ref
+			     	 html: 'blabla' //feature.properties.rcn_ref
 		    	      });
 		    return L.marker(latlng, {
 			    icon: markerIcon // add the custom DivIcon to the circle marker
