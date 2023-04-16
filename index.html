@@ -91,20 +91,6 @@
  		  videoDuration = seconds;
 	});
 	
-	
-L.circleMarker([51.5, -0.09]).addTo(map);
-
-var myIcon = L.divIcon({
-  className: 'my-div-icon',
-  html: 'BLA',
-  iconAnchor: [2, 5]
-});
-// you can set .my-div-icon styles in CSS
-
-L.marker([51.5, -0.09], {
-  icon: myIcon
-}).addTo(map);
-	
 	function findPointIdxOnPolyline(track, latlng) {
 	  let prevDiffLat = prevDiffLng = 99999;
 	  let closestIdx = 0;
@@ -175,7 +161,7 @@ L.marker([51.5, -0.09], {
 		    	      });
 		    return L.marker(latlng, {
 			 //   fillColor: "white",
-			 color: "white",
+			 color: "green",
 			 //   weight: 1,
 			   opacity: 1,
 			    fillOpacity: 0,
