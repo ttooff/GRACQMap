@@ -150,11 +150,12 @@
       var clickPN = '';
       var trkpts = loadGPXFile('GH030798_1_GPS5.gpx');
 
+      var dataPN;
       async function addGeoJson() {
         const response = await fetch("PNall.geojson");
         const data = await response.json();
 
-        L.geoJson(data, {
+       dataPN = L.geoJson(data, {
           style: {
             color: 'green',
             weight: 6,
@@ -168,7 +169,9 @@
               fillOpacity: 1
             });
           }
-        }).addTo(map);
+        });
+        
+        dataPN.addTo(map);
         
         L.geoJson(data, {
           style: {
@@ -205,10 +208,9 @@
           };
           //console.log(`New video time: ${timeNewSec}`);
         });
-        return data;
       }
 
-      var dataPN = addGeoJson();
+      addGeoJson();
      
       
       var trkpt = trkpts[0];
