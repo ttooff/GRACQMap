@@ -154,7 +154,7 @@
         const response = await fetch("PNall.geojson");
         const data = await response.json();
 
-        dataPN = L.geoJson(data, {
+        var dataPN = L.geoJson(data, {
           style: {
             color: 'green',
             weight: 6,
