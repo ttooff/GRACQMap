@@ -183,6 +183,10 @@
 
 	addGeoJson();
 	
+	var myIcon = L.divIcon({className: 'my-div-icon', html: 'toto'});
+	// you can set .my-div-icon styles in CSS
+	L.marker([50.505, 30.57], {icon: myIcon}).addTo(map);
+	
 	var trkpt = trkpts[0];
 	var time = trkpt.getElementsByTagName('time')[0].textContent;
 	var lat = trkpt.getAttribute('lat');
