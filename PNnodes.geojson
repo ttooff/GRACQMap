@@ -1,0 +1,280 @@
+{
+  "type": "FeatureCollection",
+  "generator": "overpass-ide",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "timestamp": "2023-04-16T10:31:53Z",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/75304318",
+        "network:type": "node_network",
+        "rcn_ref": "52"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.3404997,
+          50.7195385
+        ]
+      },
+      "id": "node/75304318"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/75310142",
+        "network:type": "node_network",
+        "rcn_ref": "51"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.3142791,
+          50.7224317
+        ]
+      },
+      "id": "node/75310142"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/280864653",
+        "network:type": "node_network",
+        "rcn_ref": "53"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.3628288,
+          50.7263069
+        ]
+      },
+      "id": "node/280864653"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/305371149",
+        "network:type": "node_network",
+        "rcn_ref": "181"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.2061066,
+          50.7278078
+        ]
+      },
+      "id": "node/305371149"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/306473278",
+        "network:type": "node_network",
+        "rcn_ref": "165"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.2337567,
+          50.7300997
+        ]
+      },
+      "id": "node/306473278"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/443721785",
+        "network:type": "node_network",
+        "rcn_ref": "18"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.3313776,
+          50.6765641
+        ]
+      },
+      "id": "node/443721785"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/444874372",
+        "network:type": "node_network",
+        "rcn_ref": "39"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.3314022,
+          50.6777431
+        ]
+      },
+      "id": "node/444874372"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/444874391",
+        "network:type": "node_network",
+        "rcn_ref": "40"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.334388,
+          50.6783232
+        ]
+      },
+      "id": "node/444874391"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1029979392",
+        "network:type": "node_network",
+        "rcn_ref": "36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.2595533,
+          50.6953702
+        ]
+      },
+      "id": "node/1029979392"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1094625229",
+        "network:type": "node_network",
+        "rcn_ref": "15"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.2655537,
+          50.7051833
+        ]
+      },
+      "id": "node/1094625229"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1096549702",
+        "network:type": "node_network",
+        "rcn_ref": "35"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.2401893,
+          50.6933391
+        ]
+      },
+      "id": "node/1096549702"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1097919986",
+        "network:type": "node_network",
+        "rcn_ref": "33"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.2295912,
+          50.6805467
+        ]
+      },
+      "id": "node/1097919986"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1098328015",
+        "network:type": "node_network",
+        "rcn_ref": "50"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.2798077,
+          50.711817
+        ]
+      },
+      "id": "node/1098328015"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1122464520",
+        "network:type": "node_network",
+        "rcn_ref": "55"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.3412672,
+          50.6865754
+        ]
+      },
+      "id": "node/1122464520"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1888728306",
+        "network:type": "node_network",
+        "rcn_ref": "32"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.2262259,
+          50.6778266
+        ]
+      },
+      "id": "node/1888728306"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3921288961",
+        "network:type": "node_network",
+        "rcn_ref": "17"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.2405464,
+          50.6696087
+        ]
+      },
+      "id": "node/3921288961"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3949936620",
+        "network:type": "node_network",
+        "rcn_ref": "34"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.231052,
+          50.6821911
+        ]
+      },
+      "id": "node/3949936620"
+    }
+  ]
+}
