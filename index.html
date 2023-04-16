@@ -171,10 +171,6 @@
 		  var timeNew = trkpts[pointIndex].getElementsByTagName('time')[0].textContent;
 		  var timeNewSec = new Date(timeNew).getTime() / 1000 - startTimeSec;
 		  // Seek the video player to the new time and log the time to the console
-		  if (timeNewSec > videoDuration-0.5) {
-		    timeNewSec = videoDuration-0.5;
-	            //tPrev = timeNewSec;
-		  }
 		  player.setCurrentTime(timeNewSec);
 	   	  player.play();
 		  console.log(`New video time: ${timeNewSec}`);
@@ -182,10 +178,6 @@
 	}
 
 	addGeoJson();
-	
-	var myIcon = L.divIcon({className: 'my--icon', html: 'toto'});
-	// you can set .my-div-icon styles in CSS
-	L.marker([50.505, 30.57], {icon: myIcon}).addTo(map);
 	
 	var trkpt = trkpts[0];
 	var time = trkpt.getElementsByTagName('time')[0].textContent;
