@@ -195,7 +195,7 @@
           // Find the index of the clicked point on the polyline
           var pointIndex = findPointIdxOnGPXPolyline(trkpts, e.latlng);
           
-          findNearestPoint(e.latlng);
+          //findNearestPoint(e.latlng);
           
           // Get the time of the clicked point and calculate the time in seconds
           var timeNew = trkpts[pointIndex].getElementsByTagName('time')[0].textContent;
