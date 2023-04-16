@@ -52,14 +52,9 @@
 	  height: 100%;
 	}
        .my-div-icon {
-	  width:0;
-	  height:0;
-	  border: 0;
-	  padding: 0;
 	  background-color: green;
           font-size: 16px;
           color: white;
-	  border: 1px solid red;
 	}
   </style>
   
@@ -135,7 +130,7 @@
 	var trkpts = loadGPXFile('GH030798_1_GPS5.gpx');
 	
 	async function addGeoJson() {
- 	  const response = await fetch("PNnodes.geojson");
+ 	  const response = await fetch("PNall.geojson");
  	  const data = await response.json();
 		
 	  L.geoJson(data, {
@@ -146,7 +141,7 @@
 	    },
 	    pointToLayer: function(feature, latlng) {
 		     return L.circleMarker(latlng, {
-			    radius: 13,
+			    radius: 12,
 			    fillColor: 'green',
 			    fillOpacity: 1
     		    });
