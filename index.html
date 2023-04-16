@@ -152,7 +152,7 @@
 		
 	 L.geoJson(data, {
 	    style: {
-	      color: 'black',
+	      color: 'green',
 	      weight: 6,
 	      opacity: 1
 	    },
@@ -163,7 +163,9 @@
 			        html: feature.properties.rcn_ref,
 				iconSize: [24,24],
         			iconAnchor: [12, 12]
-		    	      })
+		    	      }).on('click', function(e) {
+  				 console.log('Marker clicked!', e);
+		              });
     		    });
 	        }
 	  }).addTo(map).on('click', function (e) {
