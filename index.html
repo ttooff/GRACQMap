@@ -200,7 +200,7 @@
 	var marker = new L.Marker([lat, lon]);
 	map.addLayer(marker);
 	
-	var t;
+	var tPlayer;
 	var tPrev = 0;
 	var cnt = 0;
 	var timeSec = 0;
@@ -210,17 +210,17 @@
 	
 	function showPlaytime() {		
 		player.getCurrentTime().then(function(seconds) {
- 		  t = seconds;
+ 		  tPlayer = seconds;
 		});
 		
 		// Reset GPX timer if video player went back
-		if (t < tPrev) {
+		if (tPlayer < tPrev) {
 			timeSec = 0;
 			cnt = 0;
 		}
 		//console.log(`Video time: ${t}, GPX time: ${timeSec}, cnt: ${cnt}`);
 	
-		while (timeSec < t && cnt < trkpts.length-1 ) {
+		while (timeSec <= tPlayer && cnt < trkpts.length-1 ) {
 		      cnt = cnt + 1;			
 		      trkpt = trkpts[cnt];
 		      time = trkpt.getElementsByTagName('time')[0].textContent;
@@ -228,7 +228,7 @@
 		      lon = trkpt.getAttribute('lon');
 		      timeSec = new Date(time).getTime()/1000 - startTimeSec;
 		}
-	      tPrev = t;
+	      tPrev = tPlayer;
 
 	      map.removeLayer(marker);
 	      marker = new L.Marker([lat, lon]);
