@@ -128,6 +128,7 @@
 	  }
 	}
 	
+	var clickPN = '';
 	var trkpts = loadGPXFile('GH030798_1_GPS5.gpx');
 	
 	async function addGeoJson() {
@@ -165,7 +166,7 @@
         			iconAnchor: [12, 12]
 		    	      })
     		    }).on('click', function(e) {
-  			    player.pause();
+  			    clickPN = feature.properties.rcn_ref;
 		    });
 	        }
 	  }).addTo(map).on('click', function (e) {
@@ -225,6 +226,11 @@
 	      map.removeLayer(marker);
 	      marker = new L.Marker([lat, lon]);
 	      map.addLayer(marker);
+		
+	      // Pause video if clicked on a PN
+	      if (clickPN <> '') {
+	      		player.pause();
+	      }
 	}
 	
 	
