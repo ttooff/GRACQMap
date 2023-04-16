@@ -208,7 +208,7 @@
           tMap = 0;
           cnt = 0;
         }
-        //console.log(`Video time: ${t}, GPX time: ${timeSec}, cnt: ${cnt}`);
+        //console.log(`Video time: ${tPlayer}, GPX time: ${tMap}, cnt: ${cnt}`);
 
         while (tMap <= tPlayer && cnt < trkpts.length - 1) {
           cnt = cnt + 1;
@@ -223,6 +223,10 @@
         map.removeLayer(marker);
         marker = new L.Marker([lat, lon]);
         map.addLayer(marker);
+        
+        const myDiv = document.getElementById("status");
+        // Add some text to the div
+        myDiv.innerHTML = "Hello, world!";
       }
     </script>
   </body>
