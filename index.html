@@ -177,7 +177,14 @@
 		  var timeNewSec = new Date(timeNew).getTime() / 1000 - startTimeSec;
 		  // Seek the video player to the new time and log the time to the console
 		  player.setCurrentTime(timeNewSec);
-	   	  player.play();
+	   	  // Pause video if clicked on a PN
+	      	  if (clickPN !== '') {
+	      	     player.pause();
+		     clickPN = '';
+	      	  }
+		  else {
+		     player.play();
+		  };
 		  //console.log(`New video time: ${timeNewSec}`);
 	    });
 	}
@@ -226,12 +233,6 @@
 	      map.removeLayer(marker);
 	      marker = new L.Marker([lat, lon]);
 	      map.addLayer(marker);
-		
-	      // Pause video if clicked on a PN
-	      if (clickPN !== '') {
-	      	  player.pause();
-		  clickPN = '';
-	      }
 	}
 	
 	
