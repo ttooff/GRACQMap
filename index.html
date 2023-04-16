@@ -150,7 +150,11 @@
 	  }).addTo(map);
 		
 	 L.geoJson(data, {
-	
+	    style: {
+	      color: 'green',
+	      weight: 4,
+	      opacity: 1
+	    },
 		 pointToLayer: function(feature, latlng) {
 		    return L.marker(latlng, {
 			      icon: L.divIcon({
