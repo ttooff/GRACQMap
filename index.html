@@ -28,15 +28,15 @@
       width: 100%;
     }
 	.row {
- 	  display: flex;
+	  display: flex;
 	  height: 100%;
 	}
 	.column {
-  	  flex: 50%;
+	  flex: 50%;
 	}
 	#map {
-     	  height: 100%;
-     	  width: 100%;
+	  height: 100%;
+	  width: 100%;
     }
 	#player {
 	  position: relative;
@@ -153,12 +153,7 @@
 	  }).addTo(map);
 		
 	 L.geoJson(data, {
-	    style: {
-	     // color: "green",
-	     // weight: 4,
-	     // opacity: 1,
-	     fillColor: 'green'
-	    },
+	
 		 pointToLayer: function(feature, latlng) {
 			       var markerIcon = L.divIcon({
 				  class: 'my-div-icon',
