@@ -116,7 +116,7 @@
         return closestIdx;
       }
 
-      function projectOnPNPolyLine(track, latlng) {
+      function projectOnPNPolyLine(dataPN, latlng) {
         let prevDiffLat = prevDiffLng = 99999;
         let closestIdx = 0;
         for (var i = 0; i < track.length; i++) {
@@ -171,7 +171,7 @@
         });
         
         dataPN.addTo(map);
-
+        
         L.geoJson(data, {
           style: {
             color: 'transparent',
@@ -207,9 +207,10 @@
           };
           //console.log(`New video time: ${timeNewSec}`);
         });
+        return data;
       }
 
-      addGeoJson();
+      var dataPN = addGeoJson();
      
       
       var trkpt = trkpts[0];
