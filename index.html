@@ -3,27 +3,28 @@
   <head>
     <title>GRACQ Hesbaye - Vidéo Map</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin="">
+    </script>
     <script src="https://player.vimeo.com/api/player.js"></script>
+  </head>
+
+  <body>
     <style>
       body {
         padding: 0;
         margin: 0;
         overflow: hidden;
       }
-      html,
-      body {
+      html, body {
         height: 100%;
         width: 100%;
       }
       .row {
         display: flex;
         height: 100%;
-        flex-direction: column; /* added */
       }
       .column {
         flex: 50%;
-        //height: 100%; /* added */
       }
       #map {
         height: 100%;
@@ -47,29 +48,16 @@
         color: white;
         text-align: center;
       }
-
-      /* Media query for portrait screens */
-      @media screen and (orientation: portrait) {
-        .row {
-          flex-direction: row;
-        }
-        .column {
-          flex: 100%;
-          height: 50%; /* added */
-        }
-      }
     </style>
-  </head>
 
-  <body>
     <div class="row">
       <div class="column">
         <div id="map"></div>
       </div>
       <div class="column">
         <div id="player"></div>
-        <img src="GRACQHesbayeLogo.jpg" height="25%" />
-        <div id="status"></div>
+        <img src="GRACQHesbayeLogo.jpg" height="25%">
+         <div id="status"></div>
       </div>
     </div>
   </body>
