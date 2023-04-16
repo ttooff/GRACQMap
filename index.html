@@ -132,12 +132,13 @@
 	    style: {
 	      color: 'green',
 	      weight: 6,
-	      opacity: 1,
-	      fillColor: 'green'
+	      opacity: 1
 	    },
 	    pointToLayer: function(feature, latlng) {
 		     return L.circleMarker(latlng, {
-			    radius: 13
+			    radius: 13,
+			    fillColor: 'green',
+			    fillOpacity: 1
     		    });
 	        }
 	  }).addTo(map);
