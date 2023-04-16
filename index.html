@@ -135,6 +135,8 @@
         }
       }
 
+      
+      var clickPN = '';
       var trkpts = loadGPXFile('GH030798_1_GPS5.gpx');
 
       async function addGeoJson() {
@@ -175,13 +177,7 @@
               clickPN = feature.properties.rcn_ref;
             });
           }
-        }).addTo(map);
-      }
-
-      addGeoJson();
-
-      var clickPN = '';
-      map.on('click', function(e) {
+        }).addTo(map).on('click', function(e) {
           // Find the index of the clicked point on the polyline
           var pointIndex = findPointIdxOnPolyline(trkpts, e.latlng);
           // Get the time of the clicked point and calculate the time in seconds
@@ -197,7 +193,11 @@
             player.play();
           };
           //console.log(`New video time: ${timeNewSec}`);
-      });
+        });
+      }
+
+      addGeoJson();
+     
       
       var trkpt = trkpts[0];
       var time = trkpt.getElementsByTagName('time')[0].textContent;
