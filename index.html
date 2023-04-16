@@ -136,13 +136,14 @@
 		
 	  L.geoJson(data, {
 	    style: {
-	      color: 'green',
+	      color: 'black',
 	      weight: 6,
 	      opacity: 1
 	    },
 	    pointToLayer: function(feature, latlng) {
 		     return L.circleMarker(latlng, {
 			    radius: 12,
+			    color: 'green',
 			    fillColor: 'green',
 			    fillOpacity: 1
     		    });
