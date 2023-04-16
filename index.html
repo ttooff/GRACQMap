@@ -159,7 +159,8 @@
 		    return L.marker(latlng, {
 			      icon: L.divIcon({
 			        className: 'my-div-icon',
-			        html: feature.properties.rcn_ref
+			        html: feature.properties.rcn_ref,
+				iconAnchor: [9, 11]  // Found emprically
 		    	      })
     		    });
 	        }
