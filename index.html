@@ -125,7 +125,7 @@
 	var trkpts = loadGPXFile('GH030798_1_GPS5.gpx');
 	
 	async function addGeoJson() {
- 	  const response = await fetch("PNall.geojson");
+ 	  const response = await fetch("PNnodes.geojson");
  	  const data = await response.json();
 		
 	  L.geoJson(data, {
