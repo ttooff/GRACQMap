@@ -30,7 +30,6 @@
       #map {
         height: 100%;
         width: 100%;
-        cursor: crosshair;
       }
       #player {
         position: relative;
@@ -84,8 +83,6 @@
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       }).addTo(map);
-
-    
       
       var gpx = 'GH030798_1_GPS5.gpx';
       var gpxData;
@@ -135,7 +132,6 @@
         }
       }
 
-      
       var clickPN = '';
       var trkpts = loadGPXFile('GH030798_1_GPS5.gpx');
 
@@ -161,8 +157,8 @@
 
         L.geoJson(data, {
           style: {
-            color: 'green',
-            weight: 6,
+            color: 'transparent',
+            weight: 18,
             opacity: 1
           },
           pointToLayer: function(feature, latlng) {
