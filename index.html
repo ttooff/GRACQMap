@@ -81,11 +81,11 @@
       </div>
       <div class="column">
         <div id="player"></div>
-        <img src="GRACQHesbayeLogo.jpg" height="25%">
         <div>
           <button id="playPauseButton">></button>
-          <button id="speedButton">></button>
+          <button id="speedButton">x1</button>
         </div>
+        <img src="GRACQHesbayeLogo.jpg" height="25%">
       </div>
     </div>
 
@@ -130,12 +130,12 @@
       var speedButton = document.getElementById('speedButton');
       speedButton.addEventListener('click', function() {
         player.getPlaybackRate().then(function(rate) {
-          var newRate = rate == 1 ? 1.25 : 1;
+          var newRate = rate == 1 ? 2 : 1;
           player.setPlaybackRate(newRate);
-          speedButton.textContent = 'Speed: ' + newRate + 'x';
+          speedButton.textContent = 'x' + newRate;
         });
       });
-      
+
 
       function findPointIdxOnGPXPolyline(track, latlng) {
         let prevDiffLat = prevDiffLng = 99999;
