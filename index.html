@@ -272,12 +272,12 @@
       var tMap = 0;
 
       // Update marker every 25ms
-      setInterval(updateMarker, 500);
+      setInterval(updateMarker, 25);
 
       function updateMarker() {
         player.getCurrentTime().then(function(seconds) {
-          player.setCurrentTime(seconds+4); 
-          tPlayer = seconds+1;
+          //player.setCurrentTime(seconds+4); 
+          tPlayer = seconds;
         });
 
         // Reset GPX timer if video player went back
