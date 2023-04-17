@@ -275,7 +275,7 @@
       function updateMarker() {
         player.getCurrentTime().then(function(seconds) {
            player.setCurrentTime(seconds+0.25);
-           tPlayer = seconds+1;
+           tPlayer = seconds+0.25;
         });
 
         // Reset GPX timer if video player went back
