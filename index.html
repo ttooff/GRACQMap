@@ -272,11 +272,11 @@
       var tMap = 0;
 
       // Update marker every 25ms
-      setInterval(updateMarker, 250);
+      setInterval(updateMarker, 500);
 
       function updateMarker() {
         player.getCurrentTime().then(function(seconds) {
-          player.setCurrentTime(seconds+1); 
+          player.setCurrentTime(seconds+4); 
           tPlayer = seconds+1;
         });
 
