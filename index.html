@@ -130,14 +130,7 @@
       var speedButton = document.getElementById('speedButton');
       speedButton.addEventListener('click', function() {
         player.getPlaybackRate().then(function(rate) {
-            var newRate;
-            if (rate === 1) {
-              newRate = 2;
-            } else if (rate === 2) {
-               newRate = 4;
-            } else {
-              newRate = 1;
-            }
+             var newRate = rate == 1 ? 2 : 1;
           player.setPlaybackRate(newRate);
           speedButton.textContent = 'x' + newRate;
         });
