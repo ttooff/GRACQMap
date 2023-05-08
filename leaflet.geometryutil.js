@@ -1,10 +1,3 @@
-
-
-
-
-
-
-<!DOCTYPE html>
 <html lang="en" data-color-mode="auto" data-light-theme="dark" data-dark-theme="dark" data-a11y-animated-images="system">
   <head>
     <meta charset="utf-8">
