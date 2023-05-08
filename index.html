@@ -252,6 +252,10 @@
 
       addGeoJson();
 
+      map.on('zoomend', function () {
+        addGeoJson();
+      });
+      
       var trkpt = trkpts[0];
       var time = trkpt.getElementsByTagName('time')[0].textContent;
       var lat = trkpt.getAttribute('lat');
