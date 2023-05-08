@@ -198,7 +198,7 @@
           // Node network node circles
           pointToLayer: function(feature, latlng) {
             return L.circleMarker(latlng, {
-              radius: L.map('map').getZoomLevel(),
+              radius: 12,
               color: 'green',
               fillColor: 'green',
               fillOpacity: 1
