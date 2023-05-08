@@ -183,6 +183,7 @@
       var clickPN = '';
       var trkpts = loadGPXFile('GH030798_1_GPS5.gpx');
 
+      var Ltest;
       var dataPN;
       async function addGeoJson() {
         const response = await fetch("PNall.geojson");
@@ -206,7 +207,7 @@
           }
         });
 
-        dataPN.addTo(map);
+        Ltest = dataPN.addTo(map);
 
         // Thick transparent layer with easy clicking
         L.geoJson(data, {
@@ -253,7 +254,7 @@
       addGeoJson();
 
       map.on('zoomend', function () {
-        dataPN.redraw();
+        Ltest.redraw();
       });
       
       var trkpt = trkpts[0];
