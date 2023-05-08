@@ -7,7 +7,7 @@
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin="">
     </script>
     <script src="https://player.vimeo.com/api/player.js"></script>
-    <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+    <script src="leaflet.geometryutil.js"></script>
   </head>
 
   <body>
@@ -152,7 +152,25 @@
         return closestIdx;
       }
 
-      function projectOnPNPolyLine(dataPN, latlng) {
+      function findNearestPoint(latlng) {
+        let nearestPoint;
+        let shortestDistance = Number.MAX_SAFE_INTEGER;
+
+        dataPN.eachLayer(function(layer) {
+          var layerLatLng = layer.getLatLng();
+          var distance = latlng.distanceTo(layerLatLng);
+
+          if (distance < shortestDistance) {
+            shortestDistance = distance;
+            nearestPoint = layerLatLng;
+          }
+        });
+
+        return nearestPoint;
+      }
+      
+      
+      function projectOnPNPolyLine() {
         let prevDiffLat = prevDiffLng = 99999;
         let closestIdx = 0;
         for (var i = 0; i < track.length; i++) {
@@ -298,28 +316,6 @@
         map.removeLayer(marker);
         marker = new L.Marker([lat, lon]);
         map.addLayer(marker);
-      }
-
-      function findNearestPoint(coord) {
-        // Find the nearest point on each polyline
-        var nearestPoints = [];
-        dataPN.eachLayer(function(layer) {
-          var feature = layer.feature;
-          if (feature.geometry.type !== "Point") {
-            var nearestPoint = turf.nearestPointOnLine(feature.geometry, turf.point([coord.lat, coord.lng]));
-            nearestPoints.push(nearestPoint);
-          }
-        });
-
-        // Find the nearest point overall
-        var nearestPoint = nearestPoints.reduce(function(prev, current) {
-          var prevDist = turf.distance(turf.point([coord.lat, coord.lng]), prev);
-          var currentDist = turf.distance(turf.point([coord.lat, coord.lng]), current);
-          return (prevDist < currentDist) ? prev : current;
-        });
-
-        // Add the nearest point to the map as a marker
-        L.marker([nearestPoint.geometry.coordinates[1], nearestPoint.geometry.coordinates[0]]).addTo(map);
       }
 
     </script>
