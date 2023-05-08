@@ -253,7 +253,7 @@
       addGeoJson();
 
       map.on('zoomend', function () {
-        addGeoJson();
+        dataPN.redraw();
       });
       
       var trkpt = trkpts[0];
