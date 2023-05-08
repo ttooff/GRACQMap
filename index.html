@@ -188,12 +188,14 @@
         const response = await fetch("PNall.geojson");
         const data = await response.json();
 
+        // Node network ways
         dataPN = L.geoJson(data, {
           style: {
             color: 'green',
             weight: 6,
             opacity: 1
           },
+          // Node network node circles
           pointToLayer: function(feature, latlng) {
             return L.circleMarker(latlng, {
               radius: 12,
@@ -206,12 +208,14 @@
 
         dataPN.addTo(map);
 
+        // Thick transparent layer with easy clicking
         L.geoJson(data, {
           style: {
             color: 'transparent',
             weight: 36, // to ease clicking on mobile devices
             opacity: 1
           },
+          // Node network node numbers
           pointToLayer: function(feature, latlng) {
             return L.marker(latlng, {
               icon: L.divIcon({
@@ -228,12 +232,10 @@
           // Find the index of the clicked point on the polyline
           var pointIndex = findPointIdxOnGPXPolyline(trkpts, e.latlng);
 
-          //findNearestPoint(e.latlng);
-
           // Get the time of the clicked point and calculate the time in seconds
           var timeNew = trkpts[pointIndex].getElementsByTagName('time')[0].textContent;
           var timeNewSec = new Date(timeNew).getTime() / 1000 - startTimeSec;
-          // Seek the video player to the new time and log the time to the console
+          // Seek the video player to the new time
           player.setCurrentTime(timeNewSec);
           // Pause video if clicked on a PN
           if (clickPN !== '') {
@@ -293,10 +295,6 @@
         map.removeLayer(marker);
         marker = new L.Marker([lat, lon]);
         map.addLayer(marker);
-
-        const myDiv = document.getElementById("status");
-        // Add some text to the div
-        //myDiv.innerHTML = "Hello, world!";
       }
 
       function findNearestPoint(coord) {
