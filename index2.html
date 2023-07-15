@@ -183,7 +183,9 @@
       var clickPN = '';
       var trkpts = loadGPXFile('GH010805_1_GPS5_all.gpx');
 
-      var dataPN;
+      var dataPN;  // Visible polylines and nodes
+      var dataPN2; // Node numbers + thick transparent clickable polylines
+
       async function addGeoJson() {
         const response = await fetch("PNall.geojson");
         const data = await response.json();
@@ -196,7 +198,7 @@
           },
           pointToLayer: function(feature, latlng) {
             return L.circleMarker(latlng, {
-              radius: 12,
+              radius: 10,
               color: 'green',
               fillColor: 'green',
               fillOpacity: 1
@@ -206,7 +208,7 @@
 
         dataPN.addTo(map);
 
-        L.geoJson(data, {
+        dataPN2 = L.geoJson(data, {
           style: {
             color: 'transparent',
             weight: 36, // to ease clicking on mobile devices
@@ -216,15 +218,18 @@
             return L.marker(latlng, {
               icon: L.divIcon({
                 className: 'my-div-icon',
+                pn: feature.properties.rcn_ref,
                 html: feature.properties.rcn_ref,
-                iconSize: [24, 24],
-                iconAnchor: [12, 12]
+                iconSize: [20, 20],
+                iconAnchor: [10, 12]
               })
             }).on('click', function(e) {
               clickPN = feature.properties.rcn_ref;
             });
           }
-        }).addTo(map).on('click', function(e) {
+        });
+
+        dataPN2.addTo(map).on('click', function(e) {
           // Find the index of the clicked point on the polyline
           var pointIndex = findPointIdxOnGPXPolyline(trkpts, e.latlng);
 
@@ -249,6 +254,31 @@
       }
 
       addGeoJson();
+
+      map.on('zoomend', function() {
+        var zoom1 = map.getZoom()**2/20;
+        dataPN.eachLayer(function(layer) {
+          if (layer instanceof L.CircleMarker) {
+            layer.setRadius(zoom1);
+            console.log(zoom1);
+          }
+          layer.setStyle({ weight: zoom1/2 });
+        });
+        dataPN2.eachLayer(function(layer) {
+          zoom2 = zoom1/1.5;
+          if (layer instanceof L.Marker) {
+            layer.setIcon(
+              L.divIcon({
+                className: 'my-div-icon',
+                pn: layer.options.icon.options.pn,
+                html: '<div style="font-size: ' + zoom2*2 + 'px;">' + layer.options.icon.options.pn + '</div>',
+                iconSize: [zoom1*2, zoom1*2],
+                iconAnchor: [zoom1, zoom1*0.95]
+              })
+            );
+          }
+        });
+      });
 
       var trkpt = trkpts[0];
       var time = trkpt.getElementsByTagName('time')[0].textContent;
