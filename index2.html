@@ -39,6 +39,17 @@
         width: 100%;
       }
 
+      #map2 {
+        height: 20%;
+        width: 100%;
+        background-color: white;
+      }
+      
+      /* Hide the Leaflet logo */
+      .leaflet-control-attribution {
+        display: none !important;
+      }
+
       #player {
         position: relative;
         width: 100%;
@@ -55,7 +66,6 @@
 
       .my-div-icon {
         background-color: transparent;
-        font-size: 16px;
         color: white;
         text-align: center;
       }
@@ -67,7 +77,11 @@
         }
         .column {
           flex: 100%;
-          height: 50%;
+          height: 30%;
+        } 
+        #map {
+          height: 100%;
+          width: 100%;
         }
       }
 
@@ -83,15 +97,17 @@
           <button id="playPauseButton">></button>
           <button id="speedButton">x1</button>
         </div>
+        <div id="map2"></div>
         <img src="GRACQHesbayeLogo.jpg" height="25%">
       </div>
     </div>
 
     <script>
-      var coords = [50.70513595799738, 5.271691432079298]; // the geographic center of our map
-      var zoomLevel = 13; // the map scale. See: http://wiki.openstreetmap.org/wiki/Zoom_levels
+      var coords = [50.67315742625338, 5.375468482621426]; // the geographic center of our map
+      var pnVec = [56, 59, 43, 42, 40, 55, 56];
+      var initZoomLevel = 13; // the map scale. See: http://wiki.openstreetmap.org/wiki/Zoom_levels
 
-      var map = L.map('map').setView(coords, zoomLevel);
+      var map = L.map('map').setView(coords, initZoomLevel);
 
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
@@ -149,23 +165,6 @@
         return closestIdx;
       }
 
-      function projectOnPNPolyLine(dataPN, latlng) {
-        let prevDiffLat = prevDiffLng = 99999;
-        let closestIdx = 0;
-        for (var i = 0; i < track.length; i++) {
-          var latTmp = trkpts[i].getAttribute('lat');
-          var lonTmp = trkpts[i].getAttribute('lon');
-          var diffLat = Math.abs(latTmp - latlng.lat);
-          var diffLng = Math.abs(lonTmp - latlng.lng);
-          if (diffLat + diffLng < prevDiffLat + prevDiffLng) {
-            prevDiffLat = diffLat;
-            prevDiffLng = diffLng;
-            closestIdx = i;
-          }
-        }
-        return closestIdx;
-      }
-
       // Load data from GPX file
       function loadGPXFile(filename) {
         var xhr = new XMLHttpRequest();
@@ -183,12 +182,13 @@
       var clickPN = '';
       var trkpts = loadGPXFile('GH010805_1_GPS5_all.gpx');
 
-      var dataPN;  // Visible polylines and nodes
-      var dataPN2; // Node numbers + thick transparent clickable polylines
+      var dataPN;  // Layer with visible polylines and nodes
+      var dataPN2; // Layer with node numbers + thick transparent clickable polylines
+      var data;    // GeoJSON data
 
       async function addGeoJson() {
         const response = await fetch("PNall.geojson");
-        const data = await response.json();
+        data = await response.json();
 
         dataPN = L.geoJson(data, {
           style: {
@@ -198,7 +198,7 @@
           },
           pointToLayer: function(feature, latlng) {
             return L.circleMarker(latlng, {
-              radius: 10,
+              radius: initZoomLevel**2/20,
               color: 'green',
               fillColor: 'green',
               fillOpacity: 1
@@ -208,6 +208,42 @@
 
         dataPN.addTo(map);
 
+        // Create an empty GeoJSON object to store the segments connecting the nodes
+        var connectingSegments = {
+          type: "FeatureCollection",
+          features: []
+        };
+
+        // Loop through the features of the GeoJSON data
+        for (var i = 0; i < pnVec.length - 1; i++) {
+          var refValue1 = pnVec[i] + "-" + pnVec[i + 1];
+          var refValue2 = pnVec[i+1] + "-" + pnVec[i];
+          var matchingFeature = data.features.find(feature => {
+            return (
+              feature.properties &&
+              feature.properties["ref"] &&
+              feature.properties["ref"] === refValue1 || feature.properties["ref"] === refValue2
+            );
+          });
+
+          if (matchingFeature) {
+            // Add the feature to the new GeoJSON layer
+            connectingSegments.features.push(matchingFeature);
+          }
+        }
+
+        // Create a new Leaflet layer using the connectingSegments GeoJSON object
+        var connectingLayer = L.geoJson(connectingSegments, {
+          style: {
+            color: 'blue',
+            weight: 6,
+            opacity: 1
+          },
+        });
+
+        // Now you can add the connectingLayer to the map
+        connectingLayer.addTo(map);
+
         dataPN2 = L.geoJson(data, {
           style: {
             color: 'transparent',
@@ -215,13 +251,14 @@
             opacity: 1
           },
           pointToLayer: function(feature, latlng) {
+            var zoom1 = initZoomLevel**2/20;
             return L.marker(latlng, {
               icon: L.divIcon({
                 className: 'my-div-icon',
                 pn: feature.properties.rcn_ref,
-                html: feature.properties.rcn_ref,
-                iconSize: [20, 20],
-                iconAnchor: [10, 12]
+                html: '<div style="font-size: ' + zoom1/1.5*2 + 'px;">' + feature.properties.rcn_ref + '</div>',
+                iconSize: [zoom1*2, zoom1*2],
+                iconAnchor: [zoom1, zoom1*0.95]
               })
             }).on('click', function(e) {
               clickPN = feature.properties.rcn_ref;
@@ -232,8 +269,6 @@
         dataPN2.addTo(map).on('click', function(e) {
           // Find the index of the clicked point on the polyline
           var pointIndex = findPointIdxOnGPXPolyline(trkpts, e.latlng);
-
-          //findNearestPoint(e.latlng);
 
           // Get the time of the clicked point and calculate the time in seconds
           var timeNew = trkpts[pointIndex].getElementsByTagName('time')[0].textContent;
@@ -249,18 +284,47 @@
             player.play();
             playPauseButton.textContent = '>';
           };
-          //console.log(`New video time: ${timeNewSec}`);
         });
+
+        // Find the time indexes of the nodes and add to Map2
+        for (var i = 0; i < pnVec.length; i++) {
+          var matchingFeature = data.features.find(feature => {
+            return (
+              feature.properties &&
+              feature.properties["rcn_ref"] &&
+              feature.properties["rcn_ref"] === pnVec[i].toString()
+            );
+          });
+
+          if (matchingFeature) {
+            pnCoordinate = matchingFeature.geometry.coordinates;
+            // Find the index of the node coordinates in the network
+            var pointIndex = findPointIdxOnGPXPolyline(trkpts, L.latLng(pnCoordinate[1], pnCoordinate[0]));
+
+            // Get the time of the clicked point and calculate the time in seconds
+            var timeNode = trkpts[pointIndex].getElementsByTagName('time')[0].textContent;
+            var timeNodeSec = new Date(timeNode).getTime() / 1000 - startTimeSec;
+            L.circleMarker([0, timeNodeSec/(stopTimeSec-startTimeSec)*map2Length], { radius: 10, color: 'green', fillOpacity: 1 }).addTo(map2);
+            L.marker([0, timeNodeSec/(stopTimeSec-startTimeSec)*map2Length], {
+              icon: L.divIcon({
+                className: 'my-div-icon',
+                iconSize: [20, 20],
+                iconAnchor: [10, 10],
+                html: pnVec[i].toString()
+              })
+            }).addTo(map2);
+          }
+        }
       }
 
       addGeoJson();
 
+      // Automatic resizing of tracks and nodes in function of zoom level
       map.on('zoomend', function() {
         var zoom1 = map.getZoom()**2/20;
         dataPN.eachLayer(function(layer) {
           if (layer instanceof L.CircleMarker) {
             layer.setRadius(zoom1);
-            console.log(zoom1);
           }
           layer.setStyle({ weight: zoom1/2 });
         });
@@ -280,11 +344,12 @@
         });
       });
 
-      var trkpt = trkpts[0];
-      var time = trkpt.getElementsByTagName('time')[0].textContent;
-      var lat = trkpt.getAttribute('lat');
-      var lon = trkpt.getAttribute('lon');
-      const startTimeSec = new Date(time).getTime() / 1000;
+      var timeStart = trkpts[0].getElementsByTagName('time')[0].textContent;
+      var timeStop = trkpts[trkpts.length-1].getElementsByTagName('time')[0].textContent;
+      var lat = trkpts[0].getAttribute('lat');
+      var lon = trkpts[0].getAttribute('lon');
+      const startTimeSec = new Date(timeStart).getTime() / 1000;
+      const stopTimeSec = new Date(timeStop).getTime() / 1000;
 
       var marker = new L.Marker([lat, lon]);
       map.addLayer(marker);
@@ -313,7 +378,7 @@
         while (tMap <= tPlayer && cnt < trkpts.length - 1) {
           cnt = cnt + 1;
           trkpt = trkpts[cnt];
-          time = trkpt.getElementsByTagName('time')[0].textContent;
+          var time = trkpt.getElementsByTagName('time')[0].textContent;
           lat = trkpt.getAttribute('lat');
           lon = trkpt.getAttribute('lon');
           tMap = new Date(time).getTime() / 1000 - startTimeSec;
@@ -324,33 +389,33 @@
         marker = new L.Marker([lat, lon]);
         map.addLayer(marker);
 
-        const myDiv = document.getElementById("status");
-        // Add some text to the div
-        //myDiv.innerHTML = "Hello, world!";
+        map2.removeLayer(marker2);
+        marker2 = new L.Marker([0, tMap/(stopTimeSec-startTimeSec)*map2Length]);
+        map2.addLayer(marker2);
       }
+      
+      // *****************************************************************
+      // * MAP 2                                                         *
+      // *****************************************************************
+      var map2Length = 35;
+      var map2 = L.map('map2', {
+        zoomControl: false, // Disable default zoom control
+        dragging: false,     // Disable map dragging
+        maxZoom: 4,         // Fix the maximum zoom level
+        minZoom: 4         // Fix the minimum zoom level
+      } ).setView([0, map2Length/2], 4);
+      // Create a horizontal line
+      var lineCoordinates = [
+        [0, 0], // Start point (latitude, longitude)
+        [0, map2Length]  // End point (latitude, longitude)
+      ];
 
-      function findNearestPoint(coord) {
-        // Find the nearest point on each polyline
-        var nearestPoints = [];
-        dataPN.eachLayer(function(layer) {
-          var feature = layer.feature;
-          if (feature.geometry.type !== "Point") {
-            var nearestPoint = turf.nearestPointOnLine(feature.geometry, turf.point([coord.lat, coord.lng]));
-            nearestPoints.push(nearestPoint);
-          }
-        });
+     
 
-        // Find the nearest point overall
-        var nearestPoint = nearestPoints.reduce(function(prev, current) {
-          var prevDist = turf.distance(turf.point([coord.lat, coord.lng]), prev);
-          var currentDist = turf.distance(turf.point([coord.lat, coord.lng]), current);
-          return (prevDist < currentDist) ? prev : current;
-        });
-
-        // Add the nearest point to the map as a marker
-        L.marker([nearestPoint.geometry.coordinates[1], nearestPoint.geometry.coordinates[0]]).addTo(map);
-      }
-
+      // Add the horizontal line to the map
+      var horizontalLine = L.polyline(lineCoordinates, { color: 'blue', weight: 4 }).addTo(map2);
+      marker2 = new L.Marker([0, 0]);
+      map2.addLayer(marker2);
     </script>
   </body>
 
