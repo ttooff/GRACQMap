@@ -92,9 +92,9 @@
         <div> 
           <button id="playPauseButton">></button>
           <button id="speedButton">x1</button>
+          <button id="fullscreenButton">&#x26F6;</button>
         </div>
         <div id="map2"></div>
-        <canvkas id="myCanvas" height="20;"></canvas>
         <img src="GRACQHesbayeLogo.jpg" align="right" height="25%">
       </div>
     </div>
@@ -422,6 +422,34 @@
 
       // Add an event listener for the "resize" event
       window.addEventListener('resize', fitMapToLineBounds);
+
+      function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      } else if (document.documentElement.mozRequestFullScreen) { /* Firefox */
+        document.documentElement.mozRequestFullScreen();
+      } else if (document.documentElement.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+        document.documentElement.webkitRequestFullscreen();
+      } else if (document.documentElement.msRequestFullscreen) { /* IE/Edge */
+        document.documentElement.msRequestFullscreen();
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) { /* Firefox */
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) { /* Chrome, Safari & Opera */
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) { /* IE/Edge */
+        document.msExitFullscreen();
+      }
+    }
+  }
+
+  // Add an event listener to the button to toggle fullscreen
+  var fullscreenButton = document.getElementById('fullscreenButton');
+  fullscreenButton.addEventListener('click', toggleFullscreen);
 
     </script>
   </body>
