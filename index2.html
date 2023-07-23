@@ -89,13 +89,13 @@
       </div>
       <div class="column">
         <div id="player"></div>
+        <div id="map2"></div>
         <div> 
           <button id="playPauseButton">></button>
           <button id="speedButton">x1</button>
           <button id="fullscreenButton">&#x26F6;</button>
         </div>
-        <div id="map2"></div>
-        <img src="GRACQHesbayeLogo.jpg" align="right" height="25%">
+          <img src="GRACQHesbayeLogo.jpg" align="right" height="25%">
       </div>
     </div>
 
@@ -241,6 +241,7 @@
 
         // Now you can add the connectingLayer to the map
         connectingLayer.addTo(map);
+        map.fitBounds(connectingLayer.getBounds());
 
         dataPN2 = L.geoJson(data, {
           style: {
@@ -395,7 +396,7 @@
       // *****************************************************************
       // * MAP 2                                                         *
       // *****************************************************************
-      var map2Length = 10;
+      var map2Length = 7;
       var map2 = L.map('map2', {
         zoomControl: false, // Disable default zoom control
         dragging: false,     // Disable map dragging
@@ -416,40 +417,38 @@
       function fitMapToLineBounds() {
         map2.fitBounds(horizontalLine.getBounds());
       }
-
       // Fit the map to the bounds of the horizontal line initially
       fitMapToLineBounds();
-
       // Add an event listener for the "resize" event
       window.addEventListener('resize', fitMapToLineBounds);
 
       function toggleFullscreen() {
-    if (!document.fullscreenElement) {
-      if (document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen();
-      } else if (document.documentElement.mozRequestFullScreen) { /* Firefox */
-        document.documentElement.mozRequestFullScreen();
-      } else if (document.documentElement.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
-        document.documentElement.webkitRequestFullscreen();
-      } else if (document.documentElement.msRequestFullscreen) { /* IE/Edge */
-        document.documentElement.msRequestFullscreen();
+        if (!document.fullscreenElement) {
+          if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+          } else if (document.documentElement.mozRequestFullScreen) { /* Firefox */
+            document.documentElement.mozRequestFullScreen();
+          } else if (document.documentElement.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+            document.documentElement.webkitRequestFullscreen();
+          } else if (document.documentElement.msRequestFullscreen) { /* IE/Edge */
+            document.documentElement.msRequestFullscreen();
+          }
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.mozCancelFullScreen) { /* Firefox */
+            document.mozCancelFullScreen();
+          } else if (document.webkitExitFullscreen) { /* Chrome, Safari & Opera */
+            document.webkitExitFullscreen();
+          } else if (document.msExitFullscreen) { /* IE/Edge */
+            document.msExitFullscreen();
+          }
+        }
       }
-    } else {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      } else if (document.mozCancelFullScreen) { /* Firefox */
-        document.mozCancelFullScreen();
-      } else if (document.webkitExitFullscreen) { /* Chrome, Safari & Opera */
-        document.webkitExitFullscreen();
-      } else if (document.msExitFullscreen) { /* IE/Edge */
-        document.msExitFullscreen();
-      }
-    }
-  }
 
-  // Add an event listener to the button to toggle fullscreen
-  var fullscreenButton = document.getElementById('fullscreenButton');
-  fullscreenButton.addEventListener('click', toggleFullscreen);
+      // Add an event listener to the button to toggle fullscreen
+      var fullscreenButton = document.getElementById('fullscreenButton');
+      fullscreenButton.addEventListener('click', toggleFullscreen);
 
     </script>
   </body>
