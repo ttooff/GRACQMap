@@ -393,12 +393,10 @@
       // *****************************************************************
       // * MAP 2                                                         *
       // *****************************************************************
-      var map2Length = 35;
+      var map2Length = 10;
       var map2 = L.map('map2', {
         zoomControl: false, // Disable default zoom control
         dragging: false,     // Disable map dragging
-        maxZoom: 4,         // Fix the maximum zoom level
-        minZoom: 4         // Fix the minimum zoom level
       } ).setView([0, map2Length/2], 4);
       // Create a horizontal line
       var lineCoordinates = [
@@ -406,12 +404,22 @@
         [0, map2Length]  // End point (latitude, longitude)
       ];
 
-     
-
       // Add the horizontal line to the map
       var horizontalLine = L.polyline(lineCoordinates, { color: 'blue', weight: 4 }).addTo(map2);
       marker2 = new L.Marker([0, 0]);
       map2.addLayer(marker2);
+      map2.fitBounds(horizontalLine.getBounds());
+
+      // Function to fit the map to the bounds of the horizontal line
+      function fitMapToLineBounds() {
+        map2.fitBounds(horizontalLine.getBounds());
+      }
+
+      // Fit the map to the bounds of the horizontal line initially
+      fitMapToLineBounds();
+
+      // Add an event listener for the "resize" event
+      window.addEventListener('resize', fitMapToLineBounds);
     </script>
   </body>
 
