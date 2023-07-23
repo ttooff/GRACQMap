@@ -40,7 +40,7 @@
       }
 
       #map2 {
-        height: 20%;
+        height: 15%;
         width: 100%;
         background-color: white;
       }
@@ -89,11 +89,12 @@
       </div>
       <div class="column">
         <div id="player"></div>
-        <div>
+        <div> 
           <button id="playPauseButton">></button>
           <button id="speedButton">x1</button>
         </div>
         <div id="map2"></div>
+        <canvkas id="myCanvas" height="20;"></canvas>
         <img src="GRACQHesbayeLogo.jpg" align="right" height="25%">
       </div>
     </div>
@@ -135,6 +136,7 @@
           }
         });
       });
+
       var speedButton = document.getElementById('speedButton');
       speedButton.addEventListener('click', function() {
         player.getPlaybackRate().then(function(rate) {
@@ -305,7 +307,7 @@
               icon: L.divIcon({
                 className: 'my-div-icon',
                 iconSize: [20, 20],
-                iconAnchor: [10, 10],
+                iconAnchor: [10, 9],
                 html: pnVec[i].toString()
               })
             }).addTo(map2);
@@ -420,6 +422,7 @@
 
       // Add an event listener for the "resize" event
       window.addEventListener('resize', fitMapToLineBounds);
+
     </script>
   </body>
 
